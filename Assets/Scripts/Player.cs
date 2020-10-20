@@ -5,8 +5,10 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private GameController GC;
+    private VoiceController VC;
     private Rigidbody2D  playerRigidbody;
     private Animator playerAnimator;
+    private SpriteRenderer playerRenderer;
     public float velocidadeX;
     public float velocidadeY;
     private int direcao;
@@ -24,11 +26,21 @@ public class Player : MonoBehaviour
     public int powerUpsBlueColetados;
     public int powerUpsGreenColetados;
 
+    private bool danoRed, danoBlue, danoGreen;
+
+    public GameObject[] PowerUps;
+    private Transform SpawnPowerUp;
+
     private Transform Cima, Esquerda, Direita, Baixo;
+
+    private bool Invencivel;
     // Start is called before the first frame update
     void Start()
     {
         GC = FindObjectOfType(typeof(GameController)) as GameController;
+        VC = FindObjectOfType(typeof(VoiceController)) as VoiceController;
+
+        SpawnPowerUp = GameObject.Find("SpawnPowerUp").transform;
 
         Cima = GameObject.Find("Cima").transform;
         Esquerda = GameObject.Find("Esquerda").transform;
@@ -37,6 +49,7 @@ public class Player : MonoBehaviour
 
         playerRigidbody = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
+        playerRenderer = GetComponent<SpriteRenderer>();
 
         BarraHP = GameObject.Find("BarraVida").transform;
         BarraHP.localScale = new Vector3(1,1,1);
@@ -48,22 +61,28 @@ public class Player : MonoBehaviour
         ArmasBlue[powerUpsBlueColetados].SetActive(true);
         ArmasGreen[powerUpsGreenColetados].SetActive(true);
 
+        VC.PegaArmas();
+
+        StartCoroutine("Invencibilidade", 1.5f);
     }
 
-    /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// </summary>
-    void Update()
-    {
-        
+    void Update() {
+        if(Invencivel)
+        {
+            gameObject.tag = "PlayerInvencivel";
+        }
+        else
+        {
+            gameObject.tag = "Player";
+        }
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
+        VC.PegaArmas();
+
         float movimentoX = Input.GetAxis("Horizontal");
         float movimentoY = Input.GetAxis("Vertical");
-
 
         if (movimentoY < 0)
         {
@@ -78,7 +97,7 @@ public class Player : MonoBehaviour
             direcao = 1;
         }
 
-        playerRigidbody.velocity = new Vector2 (movimentoX * velocidadeX, movimentoY * velocidadeY);
+        playerRigidbody.velocity = new Vector2 (movimentoX * velocidadeX * GameController.instance.GameSpeed, movimentoY * velocidadeY * GameController.instance.GameSpeed);
 
         if(transform.position.x < Esquerda.position.x)
         {
@@ -98,49 +117,102 @@ public class Player : MonoBehaviour
         }
 
         playerAnimator.SetInteger("Direcao", direcao * -1);
+        playerAnimator.SetBool("Invencivel", Invencivel);
     }
 
     void OnTriggerEnter2D(Collider2D col) {
         switch (col.gameObject.tag)
         {
-            
-            case "ProjetilInimigo":
-                TomarDano(1);
+            case "InimigoRed":
+                if(!Invencivel){
+                    danoRed = true;
+                    danoBlue = false;
+                    danoGreen = false;
+                    TomarDano(2);
+                    StartCoroutine("Invencibilidade", 3.0f);
+                }
+                    break;
+
+            case "InimigoBlue":
+                if(!Invencivel){
+                    danoRed = false;
+                    danoBlue = true;
+                    danoGreen = false;
+                    TomarDano(2);
+                    StartCoroutine("Invencibilidade", 3.0f);
+                }
+                    break;
+
+            case "InimigoGreen":
+                if(!Invencivel){
+                    danoRed = false;
+                    danoBlue = false;
+                    danoGreen = true;
+                    TomarDano(2);
+                    StartCoroutine("Invencibilidade", 3.0f);
+                }
+                    break;
+
+            case "ProjetilRedInimigo":
+                if(!Invencivel){
+                    danoRed = true;
+                    danoBlue = false;
+                    danoGreen = false;
+                    TomarDano(1);
+                    StartCoroutine("Invencibilidade", 3.0f);
+                }
+                break;
+
+            case "ProjetilBlueInimigo":
+                if(!Invencivel){
+                    danoRed = false;
+                    danoBlue = true;
+                    danoGreen = false;
+                    TomarDano(1);
+                    StartCoroutine("Invencibilidade", 3.0f);
+                }
+                break;
+
+            case "ProjetilGreenInimigo":
+                if(!Invencivel){
+                    danoRed = false;
+                    danoBlue = false;
+                    danoGreen = true;
+                    TomarDano(1);
+                    StartCoroutine("Invencibilidade", 3.0f);
+                }
                 break;
 
             case "PowerUpRed":
                 PowerUpRed();
+                VC.PegaArmas();
                 Destroy(col.gameObject);
                 break;
 
             case "PowerUpBlue":
                 PowerUpBlue();
+                VC.PegaArmas();
                 Destroy(col.gameObject);
                 break;
 
             case "PowerUpGreen":
                 PowerUpGreen();
+                VC.PegaArmas();
                 Destroy(col.gameObject);
+                break;
+
+            case "Dialogo":
+                col.GetComponent<DialogueTrigger>().TriggerDialogue();
                 break;
         }
     }
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        switch (col.gameObject.tag)
+        /*switch (col.gameObject.tag)
         {
-            case "InimigoRed":
-                    TomarDano(2);
-                    break;
-
-            case "InimigoBlue":
-                    TomarDano(2);
-                    break;
-
-            case "InimigoGreen":
-                    TomarDano(2);
-                    break;
-        }
+            
+        }*/
     }
     
 
@@ -162,6 +234,21 @@ public class Player : MonoBehaviour
     {
             GameObject tempPrefab = Instantiate(ExplosaoPrefab) as GameObject;
             tempPrefab.transform.position = transform.position;
+            if(danoRed)
+            {
+                GameObject tempPowerUp = Instantiate(PowerUps[0]) as GameObject;
+                tempPowerUp.transform.position = SpawnPowerUp.position;
+            }
+            else if(danoBlue)
+            {
+                GameObject tempPowerUp = Instantiate(PowerUps[1]) as GameObject;
+                tempPowerUp.transform.position = SpawnPowerUp.position;
+            }
+            else if(danoGreen)
+            {
+                GameObject tempPowerUp = Instantiate(PowerUps[2]) as GameObject;
+                tempPowerUp.transform.position = SpawnPowerUp.position;
+            }
             GC.Morreu();
             Destroy(this.gameObject);
     }
@@ -225,5 +312,12 @@ public class Player : MonoBehaviour
         }
 
     }
-    
+
+    IEnumerator Invencibilidade(float segundosInvencivel)
+    {
+        Invencivel = true;
+        yield return new WaitForSeconds(segundosInvencivel);
+        Invencivel = false;
+    }
+
 }

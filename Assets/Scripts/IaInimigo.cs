@@ -16,11 +16,11 @@ public class IaInimigo : MonoBehaviour
 
     public Transform arma;
     public GameObject tiroPrefab;
-    public float forcaTiro;
 
     private int movimentoX;
     private int movimentoY;
 
+    public bool semWaypoint;
     public float tempoCurva;
     private int Aleatorio;
     public int chanceTiro;
@@ -48,27 +48,31 @@ public class IaInimigo : MonoBehaviour
     {
         tempTime += Time.deltaTime;
         tempTimeTiro += Time.deltaTime;
-        if(tempTime >= tempoCurva)
+        if(semWaypoint)
         {
-            tempTime = 0;
-            rand = Random.Range(0,100);
-            if(rand <= Aleatorio)
+            if(tempTime >= tempoCurva)
             {
+                tempTime = 0;
                 rand = Random.Range(0,100);
-                if(rand < 50)
+                if(rand <= Aleatorio)
                 {
-                    movimentoY = 1;
-                } else {
-                    movimentoY = -1;
+                    rand = Random.Range(0,100);
+                    if(rand < 50)
+                    {
+                        movimentoY = 1;
+                    } else {
+                        movimentoY = -1;
+                    }
+                }
+                else
+                {
+                    movimentoY = 0;
                 }
             }
-            else
-            {
-                movimentoY = 0;
-            }
+            inimigoRigidbody.velocity = new Vector2(movimentoX * velocidadeX * GameController.instance.GameSpeed, movimentoY * velocidadeY * GameController.instance.GameSpeed);
         }
 
-        if(tempTimeTiro >= tempoTiro)
+        if(tempTimeTiro >= tempoTiro / GameController.instance.GameSpeed)
         {
             tempTimeTiro = 0;
             rand = Random.Range(0,100);
@@ -79,14 +83,13 @@ public class IaInimigo : MonoBehaviour
         }
 
         //inimigoAnimator.SetInteger("Direcao", movimentoY);
-        inimigoRigidbody.velocity = new Vector2(movimentoX * velocidadeX, movimentoY * velocidadeY);
+
     }
 
     void Atirar()
     {
         GameObject tempPrefab = Instantiate(tiroPrefab) as GameObject;
         tempPrefab.transform.position = arma.position;
-        tempPrefab.GetComponent<Rigidbody2D>().AddForce(new Vector2(forcaTiro, 0));
     }
 
 
@@ -97,11 +100,22 @@ public class IaInimigo : MonoBehaviour
             case "Player":
                 Explodir();
                 break;
+            case "PlayerInvencivel":
+                break;
         }
     }
 
     void OnTriggerEnter2D(Collider2D col)
     {
+        switch (col.gameObject.tag)
+        {
+            case "Player":
+                Explodir();
+                break;
+            case "PlayerInvencivel":
+                break;
+        }
+        
         if(gameObject.tag == "InimigoRed"){
             switch (col.gameObject.tag)
             {

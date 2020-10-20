@@ -15,17 +15,17 @@ public class ArmaRedPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Fire Red"))
+        if(Input.GetButtonDown("Fire Red") && GameController.instance.GameSpeed > 0.1f)
         {
             AtirarRed();
         }
     }
 
-    void AtirarRed()
+    public void AtirarRed()
     {
         GameObject tempPrefab1 = Instantiate(tiroRedPrefab) as GameObject;
         tempPrefab1.transform.position = transform.position;
-        tempPrefab1.GetComponent<Rigidbody2D>().AddForce(new Vector2(forcaTiro, 0));
+        //tempPrefab1.GetComponent<Rigidbody2D>().AddForce(new Vector2(forcaTiro, 0));
     }
 
 

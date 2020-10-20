@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 4398009240424174469}
   - component: {fileID: 4405546397486178058}
   m_Layer: 0
-  m_Name: armaE
+  m_Name: armaRE
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 5896904084993412776}
   - component: {fileID: 7904712200463722007}
   m_Layer: 0
-  m_Name: armaE
+  m_Name: armaBE
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -232,7 +232,7 @@ GameObject:
   - component: {fileID: 5720059693133783482}
   - component: {fileID: 8743358180472764317}
   m_Layer: 0
-  m_Name: armaE
+  m_Name: armaGE
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -310,7 +310,7 @@ GameObject:
   - component: {fileID: 5585416226319877294}
   - component: {fileID: 5038674211983435437}
   m_Layer: 0
-  m_Name: armaE
+  m_Name: armaRE
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -356,7 +356,7 @@ GameObject:
   - component: {fileID: 5191653056492810486}
   - component: {fileID: 3171919855113715138}
   m_Layer: 0
-  m_Name: armaD
+  m_Name: armaRD
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -402,7 +402,7 @@ GameObject:
   - component: {fileID: 7117555684505124589}
   - component: {fileID: 2819172391247474022}
   m_Layer: 0
-  m_Name: armaE
+  m_Name: armaBE
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -546,7 +546,7 @@ GameObject:
   - component: {fileID: 1965061843809312807}
   - component: {fileID: 3291950579289575117}
   m_Layer: 0
-  m_Name: armaD
+  m_Name: armaRD
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -592,7 +592,7 @@ GameObject:
   - component: {fileID: 7820129510707976533}
   - component: {fileID: 5894338376119269078}
   m_Layer: 0
-  m_Name: armaD
+  m_Name: armaGD
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -638,7 +638,7 @@ GameObject:
   - component: {fileID: 5651956154492509988}
   - component: {fileID: 149149899952090326}
   m_Layer: 0
-  m_Name: armaD
+  m_Name: armaGD
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -684,7 +684,7 @@ GameObject:
   - component: {fileID: 821151758212766048}
   - component: {fileID: 3369962334613426353}
   m_Layer: 0
-  m_Name: armaD
+  m_Name: armaGD
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -765,6 +765,8 @@ GameObject:
   - component: {fileID: 6128643540199913794}
   - component: {fileID: 6128643540199913793}
   - component: {fileID: 6128643540199913792}
+  - component: {fileID: 8647723736096948430}
+  - component: {fileID: -2610283870725081449}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -913,6 +915,10 @@ MonoBehaviour:
   powerUpsRedColetados: 0
   powerUpsBlueColetados: 0
   powerUpsGreenColetados: 0
+  PowerUps:
+  - {fileID: 4918638317781159402, guid: 9e11af11f5fb6174bb24100333f4cd2e, type: 3}
+  - {fileID: 4918638317781159402, guid: c80cd3e9d480fe84bbfd8e54cba75204, type: 3}
+  - {fileID: 4918638317781159402, guid: 60a02ae8bea42fb49bbeb88e94cf6338, type: 3}
 --- !u!60 &6128643540199913792
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -975,6 +981,30 @@ PolygonCollider2D:
       - {x: 0.3179871, y: -0.034193482}
       - {x: 0.31967375, y: 0.0028218515}
       - {x: 0.2884234, y: 0.004887359}
+--- !u!114 &8647723736096948430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6128643540199913806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7ff06076589c6f4aab5cd2d95342e29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-2610283870725081449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6128643540199913806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9de6c2f7e852ee243ab5c6bbf937109a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6128643540584074271
 GameObject:
   m_ObjectHideFlags: 0
@@ -986,7 +1016,7 @@ GameObject:
   - component: {fileID: 6128643540584074270}
   - component: {fileID: 6714158648849089507}
   m_Layer: 0
-  m_Name: armaE
+  m_Name: armaRE
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1032,7 +1062,7 @@ GameObject:
   - component: {fileID: 6128643540962234699}
   - component: {fileID: 81556471633481287}
   m_Layer: 0
-  m_Name: armaD
+  m_Name: armaRD
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1110,7 +1140,7 @@ GameObject:
   - component: {fileID: 499256725647633780}
   - component: {fileID: 639658301855904811}
   m_Layer: 0
-  m_Name: armaE
+  m_Name: armaGE
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1156,7 +1186,7 @@ GameObject:
   - component: {fileID: 3768419184183594826}
   - component: {fileID: 2487049410309356490}
   m_Layer: 0
-  m_Name: armaE
+  m_Name: armaGE
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1234,7 +1264,7 @@ GameObject:
   - component: {fileID: 7480962749221343336}
   - component: {fileID: 5309611312312598962}
   m_Layer: 0
-  m_Name: armaD
+  m_Name: armaBD
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1312,7 +1342,7 @@ GameObject:
   - component: {fileID: 6683770922775976901}
   - component: {fileID: 7803299318399209892}
   m_Layer: 0
-  m_Name: armaD
+  m_Name: armaBD
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1358,7 +1388,7 @@ GameObject:
   - component: {fileID: 5934889051441700473}
   - component: {fileID: 1842698043930804128}
   m_Layer: 0
-  m_Name: armaE
+  m_Name: armaBE
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1404,7 +1434,7 @@ GameObject:
   - component: {fileID: 8392642215865468771}
   - component: {fileID: 1992782536624889161}
   m_Layer: 0
-  m_Name: armaD
+  m_Name: armaBD
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0

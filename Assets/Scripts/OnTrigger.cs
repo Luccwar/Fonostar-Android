@@ -5,9 +5,12 @@ using UnityEngine;
 public class OnTrigger : MonoBehaviour
 {
     void OnTriggerEnter2D(Collider2D col) {
-        if(!col.isTrigger)
+        if(col.gameObject.tag == "InimigoRed" || col.gameObject.tag == "InimigoBlue" || col.gameObject.tag == "InimigoGreen")
         {
-            Destroy(this.gameObject);
+            if(col.isTrigger)
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 }

@@ -4,7 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - ProjetilInimigo
   - ProjetilRedPlayer
   - ProjetilBluePlayer
   - ProjetilGreenPlayer
@@ -14,6 +13,11 @@ TagManager:
   - PowerUpRed
   - PowerUpBlue
   - PowerUpGreen
+  - ProjetilRedInimigo
+  - ProjetilBlueInimigo
+  - ProjetilGreenInimigo
+  - Dialogo
+  - PlayerInvencivel
   layers:
   - Default
   - TransparentFX
@@ -23,7 +27,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Inimigos
   - 
   - 
   - 

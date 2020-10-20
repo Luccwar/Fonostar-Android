@@ -5,10 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
+
+    private AudioController AC;
     // Start is called before the first frame update
     void Start()
     {
-        
+        AC = FindObjectOfType(typeof(AudioController)) as AudioController;
     }
 
     // Update is called once per frame
@@ -17,8 +19,13 @@ public class GameOver : MonoBehaviour
         
     }
 
-    public void Jogar()
+    public void TentarNovamente()
     {
-        SceneManager.LoadScene("CenaTeste");
+        AC.TrocarMusica(AC.MusicaFase1, "CenaTesteWaypoints", true);
+    }
+
+    public void VoltarAoMenu()
+    {
+        AC.TrocarMusica(AC.MusicaTitulo, "MenuPrincipal", true);
     }
 }

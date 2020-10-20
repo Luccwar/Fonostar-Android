@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6254000905326371578}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: arma
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
@@ -44,8 +44,7 @@ GameObject:
   - component: {fileID: 6254000905355924360}
   - component: {fileID: 6254000905355924362}
   - component: {fileID: 6339526524755445852}
-  - component: {fileID: 6254000905355924404}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemyBlue
   m_TagString: InimigoBlue
   m_Icon: {fileID: 0}
@@ -172,16 +171,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pontosGanhos: 5
-  velocidadeX: 3
-  velocidadeY: 3
+  velocidadeX: 0.5
+  velocidadeY: 0.5
   arma: {fileID: 6254000905326371578}
-  tiroPrefab: {fileID: 6902642285059769866, guid: b87985aa1f7fb3542967bbccf8cee843,
+  tiroPrefab: {fileID: 6902642285059769866, guid: d0739e1c6be1b7d42a3730d762e7769e,
     type: 3}
   forcaTiro: -300
   tempoCurva: 1
-  Aleatorio: 0
-  chanceTiro: 75
-  tempoTiro: 1.5
+  chanceTiro: 15
+  tempoTiro: 3
   HP: 3
   ExplosaoPrefab: {fileID: 7384292081344909178, guid: 4072d140afd88294f81d74bfb24cd37b,
     type: 3}
@@ -197,7 +195,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -231,18 +229,6 @@ PolygonCollider2D:
       - {x: -0.07105312, y: -0.24910426}
       - {x: 0.08285755, y: -0.25156456}
       - {x: 0.097318746, y: -0.34301674}
---- !u!114 &6254000905355924404
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6254000905355924363}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6c40f72f88011947ad49cf99798a786, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7488429027264224009
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,7 +240,8 @@ GameObject:
   - component: {fileID: 5790831015081082503}
   - component: {fileID: 1055804976084385094}
   - component: {fileID: 2174217997574424123}
-  m_Layer: 0
+  - component: {fileID: 1340517710044147035}
+  m_Layer: 8
   m_Name: ThrusterE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -344,6 +331,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1340517710044147035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7488429027264224009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9de6c2f7e852ee243ab5c6bbf937109a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7563949226697664683
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,7 +354,8 @@ GameObject:
   - component: {fileID: 8667984796393128339}
   - component: {fileID: 9220589380273291413}
   - component: {fileID: 7563889381709603460}
-  m_Layer: 0
+  - component: {fileID: 3695480097111767675}
+  m_Layer: 8
   m_Name: ThrusterD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -445,3 +445,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3695480097111767675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7563949226697664683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9de6c2f7e852ee243ab5c6bbf937109a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -15,17 +15,17 @@ public class ArmaGreenPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Fire Green"))
+        if(Input.GetButtonDown("Fire Green") && GameController.instance.GameSpeed > 0.1f)
         {
             AtirarGreen();
         }
     }
 
-    void AtirarGreen()
+    public void AtirarGreen()
     {
         GameObject tempPrefab1 = Instantiate(tiroGreenPrefab) as GameObject;
         tempPrefab1.transform.position = transform.position;
-        tempPrefab1.GetComponent<Rigidbody2D>().AddForce(new Vector2(forcaTiro, 0));
+        //tempPrefab1.GetComponent<Rigidbody2D>().AddForce(new Vector2(forcaTiro, 0));
     }
 
 

@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 3267243761602239248}
   - component: {fileID: 2792988667512020310}
   - component: {fileID: 2432703355665270719}
-  - component: {fileID: -5682563475999369000}
   - component: {fileID: 8895474014856934696}
+  - component: {fileID: -7712446827955565078}
+  - component: {fileID: -3123322237046050575}
   m_Layer: 0
   m_Name: TiroBlue01
   m_TagString: ProjetilBluePlayer
@@ -145,18 +146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6c40f72f88011947ad49cf99798a786, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-5682563475999369000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8133879885116131442}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f52e46855f017e4daba680dce8802ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8895474014856934696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,3 +159,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dano: 1
+--- !u!114 &-7712446827955565078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8133879885116131442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 112c4519a30c75842851f22e0ac77bf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-3123322237046050575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8133879885116131442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44c3e80e31e84fd4b95a756644b6dc14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Velocidade: 10

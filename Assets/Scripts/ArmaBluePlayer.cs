@@ -15,17 +15,17 @@ public class ArmaBluePlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Fire Blue"))
+        if(Input.GetButtonDown("Fire Blue") && GameController.instance.GameSpeed > 0.1f)
         {
             AtirarBlue();
         }
     }
 
-    void AtirarBlue()
+    public void AtirarBlue()
     {
         GameObject tempPrefab1 = Instantiate(tiroBluePrefab) as GameObject;
         tempPrefab1.transform.position = transform.position;
-        tempPrefab1.GetComponent<Rigidbody2D>().AddForce(new Vector2(forcaTiro, 0));
+        //tempPrefab1.GetComponent<Rigidbody2D>().AddForce(new Vector2(forcaTiro, 0));
     }
 
 
