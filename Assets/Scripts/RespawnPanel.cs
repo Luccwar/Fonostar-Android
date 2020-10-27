@@ -51,6 +51,8 @@ public class RespawnPanel : MonoBehaviour
 
     public void AnimacaoTerminou()
     {
+        GC.joystick.GetComponent<Animator>().SetTrigger("Morreu");
+        GC.dashButton.GetComponent<Animator>().SetTrigger("Morreu");
         if(GC.vidasExtras >= 0)
         {
             GC.Vidas();

@@ -144,6 +144,7 @@ GameObject:
   - component: {fileID: 6254000905355924360}
   - component: {fileID: 6254000905355924362}
   - component: {fileID: 6339526524755445852}
+  - component: {fileID: -4890198045980676592}
   m_Layer: 8
   m_Name: EnemyRed
   m_TagString: InimigoRed
@@ -257,11 +258,11 @@ MonoBehaviour:
   arma: {fileID: 6254000905326371578}
   tiroPrefab: {fileID: 6902642285059769866, guid: a6d699eece724cb4caea3ba79ee3cc8f,
     type: 3}
-  forcaTiro: -300
+  semWaypoint: 0
   tempoCurva: 1
-  chanceTiro: 15
-  tempoTiro: 3
-  HP: 3
+  chanceTiro: 20
+  tempoTiro: 1
+  HP: 2
   ExplosaoPrefab: {fileID: 7384292081344909178, guid: 4072d140afd88294f81d74bfb24cd37b,
     type: 3}
   Loot: {fileID: 4918638317781159402, guid: 9e11af11f5fb6174bb24100333f4cd2e, type: 3}
@@ -310,6 +311,20 @@ PolygonCollider2D:
       - {x: -0.07105312, y: -0.24910426}
       - {x: 0.08285755, y: -0.25156456}
       - {x: 0.097318746, y: -0.34301674}
+--- !u!114 &-4890198045980676592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6254000905355924363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3bb9f04cfb990f45bfede58d2aa7035, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypoints: []
+  moveSpeed: 2
 --- !u!1 &8184900345977003680
 GameObject:
   m_ObjectHideFlags: 0

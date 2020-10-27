@@ -765,7 +765,6 @@ GameObject:
   - component: {fileID: 6128643540199913794}
   - component: {fileID: 6128643540199913793}
   - component: {fileID: 6128643540199913792}
-  - component: {fileID: 8647723736096948430}
   - component: {fileID: -2610283870725081449}
   m_Layer: 0
   m_Name: Player
@@ -879,7 +878,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &6128643540199913793
 MonoBehaviour:
@@ -894,7 +893,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocidadeX: 3
+  velocidadeXBase: 0
   velocidadeY: 5
+  velocidadeYBase: 0
+  dashVelocidade: 2
+  dashTime: 0.5
+  dashCooldownBase: 3
   HP: 0
   HPMax: 2
   BarraHP: {fileID: 0}
@@ -981,18 +985,6 @@ PolygonCollider2D:
       - {x: 0.3179871, y: -0.034193482}
       - {x: 0.31967375, y: 0.0028218515}
       - {x: 0.2884234, y: 0.004887359}
---- !u!114 &8647723736096948430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6128643540199913806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7ff06076589c6f4aab5cd2d95342e29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-2610283870725081449
 MonoBehaviour:
   m_ObjectHideFlags: 0

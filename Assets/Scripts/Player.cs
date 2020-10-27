@@ -8,12 +8,21 @@ public class Player : MonoBehaviour
     private VoiceController VC;
     private Rigidbody2D  playerRigidbody;
     private Animator playerAnimator;
-    private SpriteRenderer playerRenderer;
+    protected Joystick joystick;
+    protected JoyButton joybutton;
     public float velocidadeX;
+    public float velocidadeXBase;
     public float velocidadeY;
+    public float velocidadeYBase;
     private int direcao;
-    
-
+    public float dashVelocidade;
+    public float dashTime;
+    private float dashTimeBase;
+    private float dashCooldown;
+    public float dashCooldownBase;
+    private bool dashCooldownAtivo;
+    private GameObject dashCooldownBar;
+    private bool isDashing;
     public float HP;
     public float HPMax;
     public Transform BarraHP;
@@ -49,13 +58,21 @@ public class Player : MonoBehaviour
 
         playerRigidbody = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
-        playerRenderer = GetComponent<SpriteRenderer>();
 
         BarraHP = GameObject.Find("BarraVida").transform;
         BarraHP.localScale = new Vector3(1,1,1);
 
+        dashCooldownBar = GameObject.Find("DashCooldownBar");
+
+        joystick = FindObjectOfType<Joystick>();
+        joybutton = FindObjectOfType<JoyButton>();
+
         HP = HPMax;
         percVida = HP / HPMax;
+
+        velocidadeXBase = velocidadeX;
+        velocidadeYBase = velocidadeY;
+        dashTimeBase = dashTime;
 
         ArmasRed[powerUpsRedColetados].SetActive(true);
         ArmasBlue[powerUpsBlueColetados].SetActive(true);
@@ -67,13 +84,47 @@ public class Player : MonoBehaviour
     }
 
     void Update() {
-        if(Invencivel)
+        if(joystick == null)
+        {
+            joystick = FindObjectOfType<Joystick>();
+        }
+
+        if(Invencivel || isDashing)
         {
             gameObject.tag = "PlayerInvencivel";
         }
         else
         {
             gameObject.tag = "Player";
+        }
+
+        dashCooldownBar.GetComponent<ProgressBar>().current = dashCooldown;
+        //DASH
+        if(Input.GetButtonDown("Dash") || joybutton.Pressed && !isDashing && dashCooldown == 0)
+        {
+            Dash();
+        }
+        if(isDashing)
+        {
+            dashTime -= Time.deltaTime;
+        }
+        if(dashTime <= 0f)
+        {
+            isDashing = false;
+            velocidadeX = velocidadeXBase;
+            velocidadeY = velocidadeYBase;
+            dashTime = dashTimeBase;
+            dashCooldown = dashCooldownBase;
+            dashCooldownAtivo = true;
+        }
+        if(dashCooldownAtivo)
+        {
+            dashCooldown -= Time.deltaTime;
+            if(dashCooldown <= 0)
+            {
+                dashCooldown = 0;
+                dashCooldownAtivo = false;
+            }
         }
     }
 
@@ -84,20 +135,22 @@ public class Player : MonoBehaviour
         float movimentoX = Input.GetAxis("Horizontal");
         float movimentoY = Input.GetAxis("Vertical");
 
-        if (movimentoY < 0)
+        if (movimentoY < -.333f || joystick.Vertical < -.333f)
         {
             direcao = -1;
         }
-        else if (movimentoY == 0)
+        else if (movimentoY == 0 || joystick.Vertical == 0)
         {
             direcao = 0;
         }
-         else if (movimentoY > 0)
+         else if (movimentoY > .333f || joystick.Vertical > .333f)
         {
             direcao = 1;
         }
-
-        playerRigidbody.velocity = new Vector2 (movimentoX * velocidadeX * GameController.instance.GameSpeed, movimentoY * velocidadeY * GameController.instance.GameSpeed);
+        
+        //playerRigidbody.velocity = new Vector2 (movimentoX * velocidadeX * GameController.instance.GameSpeed, movimentoY * velocidadeY * GameController.instance.GameSpeed);
+        playerRigidbody.velocity = new Vector2 (joystick.Horizontal * velocidadeX * GameController.instance.GameSpeed + movimentoX * velocidadeX * GameController.instance.GameSpeed, joystick.Vertical * velocidadeY * GameController.instance.GameSpeed + movimentoY * velocidadeY * GameController.instance.GameSpeed);
+        
 
         if(transform.position.x < Esquerda.position.x)
         {
@@ -124,7 +177,7 @@ public class Player : MonoBehaviour
         switch (col.gameObject.tag)
         {
             case "InimigoRed":
-                if(!Invencivel){
+                if(!(Invencivel || isDashing)){
                     danoRed = true;
                     danoBlue = false;
                     danoGreen = false;
@@ -134,7 +187,7 @@ public class Player : MonoBehaviour
                     break;
 
             case "InimigoBlue":
-                if(!Invencivel){
+                if(!(Invencivel || isDashing)){
                     danoRed = false;
                     danoBlue = true;
                     danoGreen = false;
@@ -144,7 +197,7 @@ public class Player : MonoBehaviour
                     break;
 
             case "InimigoGreen":
-                if(!Invencivel){
+                if(!(Invencivel || isDashing)){
                     danoRed = false;
                     danoBlue = false;
                     danoGreen = true;
@@ -154,7 +207,7 @@ public class Player : MonoBehaviour
                     break;
 
             case "ProjetilRedInimigo":
-                if(!Invencivel){
+                if(!(Invencivel || isDashing)){
                     danoRed = true;
                     danoBlue = false;
                     danoGreen = false;
@@ -164,7 +217,7 @@ public class Player : MonoBehaviour
                 break;
 
             case "ProjetilBlueInimigo":
-                if(!Invencivel){
+                if(!(Invencivel || isDashing)){
                     danoRed = false;
                     danoBlue = true;
                     danoGreen = false;
@@ -174,7 +227,7 @@ public class Player : MonoBehaviour
                 break;
 
             case "ProjetilGreenInimigo":
-                if(!Invencivel){
+                if(!(Invencivel || isDashing)){
                     danoRed = false;
                     danoBlue = false;
                     danoGreen = true;
@@ -311,6 +364,13 @@ public class Player : MonoBehaviour
             GC.pontos += 1000;
         }
 
+    }
+
+    void Dash()
+    {
+        isDashing = true;
+        velocidadeX = velocidadeX * dashVelocidade;
+        velocidadeY = velocidadeY * dashVelocidade;
     }
 
     IEnumerator Invencibilidade(float segundosInvencivel)

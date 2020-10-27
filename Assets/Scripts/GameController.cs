@@ -11,6 +11,8 @@ public class GameController : MonoBehaviour
     private PauseController PC;
     private RespawnPanel panelRespawn;
     private GameObject panelVenceu;
+    public GameObject joystick;
+    public GameObject dashButton;
     [Range(0, 2f)]
     public float GameSpeed = 1.0f;
     public Text pontuacao;
@@ -44,6 +46,8 @@ public class GameController : MonoBehaviour
         PC = FindObjectOfType(typeof(PauseController)) as PauseController;
         panelRespawn = FindObjectOfType(typeof(RespawnPanel)) as RespawnPanel;
         panelVenceu = GameObject.Find("/Canvas/PanelVenceu");
+        joystick = GameObject.Find("/Canvas/Fixed Joystick");
+        dashButton = GameObject.Find("/Canvas/Fixed JoyButton");
         Vidas();
         LevasInimigos[LevaAtual].SetActive(true);
     }
@@ -80,7 +84,6 @@ public class GameController : MonoBehaviour
                 tempVida.transform.position = new Vector3(posXIcone, vidasExtrasPosicao.position.y, vidasExtrasPosicao.position.z);
 
             }
-
             GameObject tempPlayer = Instantiate(Player) as GameObject;
             tempPlayer.transform.position = SpawnPlayer.position;
             tempPlayer.name = "Jogador";
@@ -92,6 +95,8 @@ public class GameController : MonoBehaviour
         panelRespawn.animator.SetTrigger("StartFade");
         PC.pauseButton.interactable = false;
         vidasExtras -= 1;
+        joystick.GetComponent<Animator>().SetTrigger("Morreu");
+        dashButton.GetComponent<Animator>().SetTrigger("Morreu");
         if(vidasExtras < 0)
         {
             SceneManager.LoadScene("GameOver");
@@ -128,6 +133,11 @@ public class GameController : MonoBehaviour
             }
         }
 
+    }
+
+    public void ProximaFase(string NomeFase)
+    {
+        AC.TrocarMusica(AC.MusicaFase1, NomeFase, true);
     }
 
 }
