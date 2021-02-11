@@ -10,25 +10,28 @@ public class MenuConfiguracoes : MonoBehaviour
 
     public AudioMixer audioMixer;
 
-    private GameObject MenuCanvas, ConfiguracoesCanvas;
+    private GameObject MenuCanvas, ConfiguracoesCanvas, SelecaoFaseCanvas;
     public Slider volumeSlider;
 
     private void Start() {
         AC = FindObjectOfType(typeof(AudioController)) as AudioController;
         MenuCanvas = GameObject.Find("MenuCanvas");
         ConfiguracoesCanvas = GameObject.Find("ConfiguracoesCanvas");
+        SelecaoFaseCanvas = GameObject.Find("SelecaoFaseCanvas");
         ConfiguracoesCanvas.SetActive(false);
+        SelecaoFaseCanvas.SetActive(false);
         volumeSlider.value = PlayerPrefs.GetFloat("Volume");
     }
 
     public void Comecar()
     {
-        AC.TrocarMusica(AC.MusicaFase1, "CenaTesteWaypoints", true);
+        AC.TrocarMusica(AC.MusicaFase1, "CenaTesteFacil", true);
     }
 
     public void RetornarAoMenuPrincipal()
     {
         ConfiguracoesCanvas.SetActive(false);
+        SelecaoFaseCanvas.SetActive(false);
         MenuCanvas.SetActive(true);
     }
 
@@ -36,6 +39,17 @@ public class MenuConfiguracoes : MonoBehaviour
     {
         MenuCanvas.SetActive(false);
         ConfiguracoesCanvas.SetActive(true);
+    }
+
+    public void AbrirSelecaoFase()
+    {
+        MenuCanvas.SetActive(false);
+        SelecaoFaseCanvas.SetActive(true);
+    }
+
+    public void SelecionarFase(string NomeFase)
+    {
+        AC.TrocarMusica(AC.MusicaFase1, NomeFase, true);
     }
 
     public void SetVolume (float volume)

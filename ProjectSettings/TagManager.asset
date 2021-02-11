@@ -18,6 +18,10 @@ TagManager:
   - ProjetilGreenInimigo
   - Dialogo
   - PlayerInvencivel
+  - PowerUpShieldBronze
+  - PowerUpShieldSilver
+  - PowerUpShieldGold
+  - Shield
   layers:
   - Default
   - TransparentFX

@@ -6,10 +6,11 @@ public class Player : MonoBehaviour
 {
     private GameController GC;
     private VoiceController VC;
+    private DialogueManager DM;
     private Rigidbody2D  playerRigidbody;
     private Animator playerAnimator;
     protected Joystick joystick;
-    protected JoyButton joybutton;
+    protected GameObject dashJoybutton;
     public float velocidadeX;
     public float velocidadeXBase;
     public float velocidadeY;
@@ -34,6 +35,7 @@ public class Player : MonoBehaviour
     public int powerUpsRedColetados;
     public int powerUpsBlueColetados;
     public int powerUpsGreenColetados;
+    public GameObject Shield;
 
     private bool danoRed, danoBlue, danoGreen;
 
@@ -43,11 +45,16 @@ public class Player : MonoBehaviour
     private Transform Cima, Esquerda, Direita, Baixo;
 
     private bool Invencivel;
+    private bool ShieldAtivo;
+
+    private Collider2D[] Colisores;
+
     // Start is called before the first frame update
     void Start()
     {
         GC = FindObjectOfType(typeof(GameController)) as GameController;
         VC = FindObjectOfType(typeof(VoiceController)) as VoiceController;
+        DM = FindObjectOfType(typeof(DialogueManager)) as DialogueManager;
 
         SpawnPowerUp = GameObject.Find("SpawnPowerUp").transform;
 
@@ -65,7 +72,7 @@ public class Player : MonoBehaviour
         dashCooldownBar = GameObject.Find("DashCooldownBar");
 
         joystick = FindObjectOfType<Joystick>();
-        joybutton = FindObjectOfType<JoyButton>();
+        dashJoybutton = GameObject.Find("DashButton");
 
         HP = HPMax;
         percVida = HP / HPMax;
@@ -80,7 +87,24 @@ public class Player : MonoBehaviour
 
         VC.PegaArmas();
 
-        StartCoroutine("Invencibilidade", 1.5f);
+        Shield.GetComponent<Collider2D>().enabled = false;
+
+        StartCoroutine("Invencibilidade", 1.5f / GameController.instance.GameSpeed);
+
+        Colisores = this.gameObject.GetComponents<Collider2D>();
+
+        switch (PlayerPrefs.GetInt("Skin"))
+        {
+            case 0:
+                playerAnimator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Controllers/Player/Skin0/PlayerController");
+                Colisores[0].enabled = true;
+                break;
+
+            case 1:
+                playerAnimator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Controllers/Player/Skin1/PlayerController");
+                Colisores[1].enabled = true;
+                break;
+        }
     }
 
     void Update() {
@@ -89,7 +113,7 @@ public class Player : MonoBehaviour
             joystick = FindObjectOfType<Joystick>();
         }
 
-        if(Invencivel || isDashing)
+        if(Invencivel || isDashing || ShieldAtivo)
         {
             gameObject.tag = "PlayerInvencivel";
         }
@@ -100,7 +124,7 @@ public class Player : MonoBehaviour
 
         dashCooldownBar.GetComponent<ProgressBar>().current = dashCooldown;
         //DASH
-        if(Input.GetButtonDown("Dash") || joybutton.Pressed && !isDashing && dashCooldown == 0)
+        if(Input.GetButtonDown("Dash") || dashJoybutton.GetComponent<JoyButton>().Pressed && !isDashing && dashCooldown == 0)
         {
             Dash();
         }
@@ -126,115 +150,251 @@ public class Player : MonoBehaviour
                 dashCooldownAtivo = false;
             }
         }
+        if(DM != null)
+        {
+            if(DM.DialogueBoxOpen)
+            {
+                playerRigidbody.velocity = new Vector2 (0, 0);
+            }
+        }
     }
 
     void FixedUpdate()
     {
-        VC.PegaArmas();
+        if(DM != null)
+        {
+            if(!DM.DialogueBoxOpen)
+            {
+                VC.PegaArmas();
 
-        float movimentoX = Input.GetAxis("Horizontal");
-        float movimentoY = Input.GetAxis("Vertical");
+                float movimentoX = Input.GetAxis("Horizontal");
+                float movimentoY = Input.GetAxis("Vertical");
 
-        if (movimentoY < -.333f || joystick.Vertical < -.333f)
-        {
-            direcao = -1;
-        }
-        else if (movimentoY == 0 || joystick.Vertical == 0)
-        {
-            direcao = 0;
-        }
-         else if (movimentoY > .333f || joystick.Vertical > .333f)
-        {
-            direcao = 1;
-        }
-        
-        //playerRigidbody.velocity = new Vector2 (movimentoX * velocidadeX * GameController.instance.GameSpeed, movimentoY * velocidadeY * GameController.instance.GameSpeed);
-        playerRigidbody.velocity = new Vector2 (joystick.Horizontal * velocidadeX * GameController.instance.GameSpeed + movimentoX * velocidadeX * GameController.instance.GameSpeed, joystick.Vertical * velocidadeY * GameController.instance.GameSpeed + movimentoY * velocidadeY * GameController.instance.GameSpeed);
-        
+                if (movimentoY < -.333f || joystick.Vertical < -.333f)
+                {
+                    direcao = -1;
+                }
+                else if (movimentoY == 0 || joystick.Vertical == 0)
+                {
+                        direcao = 0;
+                }
+                else if (movimentoY > .333f || joystick.Vertical > .333f)
+                {
+                    direcao = 1;
+                }
+                    
+                //playerRigidbody.velocity = new Vector2 (movimentoX * velocidadeX * GameController.instance.GameSpeed, movimentoY * velocidadeY * GameController.instance.GameSpeed);
+                playerRigidbody.velocity = new Vector2 (joystick.Horizontal * velocidadeX * GameController.instance.GameSpeed + movimentoX * velocidadeX * GameController.instance.GameSpeed, joystick.Vertical * velocidadeY * GameController.instance.GameSpeed + movimentoY * velocidadeY * GameController.instance.GameSpeed);
+                    
 
-        if(transform.position.x < Esquerda.position.x)
-        {
-            transform.position = new Vector3(Esquerda.position.x, transform.position.y, transform.position.z);
-        }
-        else if(transform.position.x > Direita.position.x)
-        {
-            transform.position = new Vector3(Direita.position.x, transform.position.y, transform.position.z);
-        }
-        if(transform.position.y > Cima.position.y)
-        {
-            transform.position = new Vector3(transform.position.x, Cima.position.y, transform.position.z);
-        }
-        else if(transform.position.y < Baixo.position.y)
-        {
-            transform.position = new Vector3(transform.position.x, Baixo.position.y, transform.position.z);
-        }
+                if(transform.position.x < Esquerda.position.x)
+                {
+                    transform.position = new Vector3(Esquerda.position.x, transform.position.y, transform.position.z);
+                }
+                else if(transform.position.x > Direita.position.x)
+                {
+                    transform.position = new Vector3(Direita.position.x, transform.position.y, transform.position.z);
+                }
+                if(transform.position.y > Cima.position.y)
+                {
+                    transform.position = new Vector3(transform.position.x, Cima.position.y, transform.position.z);
+                }
+                else if(transform.position.y < Baixo.position.y)
+                {
+                    transform.position = new Vector3(transform.position.x, Baixo.position.y, transform.position.z);
+                }
 
-        playerAnimator.SetInteger("Direcao", direcao * -1);
-        playerAnimator.SetBool("Invencivel", Invencivel);
+                    playerAnimator.SetInteger("Direcao", direcao * -1);
+                    playerAnimator.SetBool("Invencivel", Invencivel);
+            }
+        }
+        else
+        {
+            VC.PegaArmas();
+
+                float movimentoX = Input.GetAxis("Horizontal");
+                float movimentoY = Input.GetAxis("Vertical");
+
+                if (movimentoY < -.333f || joystick.Vertical < -.333f)
+                {
+                    direcao = -1;
+                }
+                else if (movimentoY == 0 || joystick.Vertical == 0)
+                {
+                        direcao = 0;
+                }
+                else if (movimentoY > .333f || joystick.Vertical > .333f)
+                {
+                    direcao = 1;
+                }
+                    
+                //playerRigidbody.velocity = new Vector2 (movimentoX * velocidadeX * GameController.instance.GameSpeed, movimentoY * velocidadeY * GameController.instance.GameSpeed);
+                playerRigidbody.velocity = new Vector2 (joystick.Horizontal * velocidadeX * GameController.instance.GameSpeed + movimentoX * velocidadeX * GameController.instance.GameSpeed, joystick.Vertical * velocidadeY * GameController.instance.GameSpeed + movimentoY * velocidadeY * GameController.instance.GameSpeed);
+                    
+
+                if(transform.position.x < Esquerda.position.x)
+                {
+                    transform.position = new Vector3(Esquerda.position.x, transform.position.y, transform.position.z);
+                }
+                else if(transform.position.x > Direita.position.x)
+                {
+                    transform.position = new Vector3(Direita.position.x, transform.position.y, transform.position.z);
+                }
+                if(transform.position.y > Cima.position.y)
+                {
+                    transform.position = new Vector3(transform.position.x, Cima.position.y, transform.position.z);
+                }
+                else if(transform.position.y < Baixo.position.y)
+                {
+                    transform.position = new Vector3(transform.position.x, Baixo.position.y, transform.position.z);
+                }
+
+                    playerAnimator.SetInteger("Direcao", direcao * -1);
+                    playerAnimator.SetBool("Invencivel", Invencivel);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D col) {
         switch (col.gameObject.tag)
         {
             case "InimigoRed":
-                if(!(Invencivel || isDashing)){
-                    danoRed = true;
-                    danoBlue = false;
-                    danoGreen = false;
-                    TomarDano(2);
-                    StartCoroutine("Invencibilidade", 3.0f);
+                if(DM != null)
+                {
+                    if(!(Invencivel || isDashing || ShieldAtivo || DM.DialogueBoxOpen)){
+                        danoRed = true;
+                        danoBlue = false;
+                        danoGreen = false;
+                        TomarDano(2);
+                        StartCoroutine("Invencibilidade", 3.0f / GameController.instance.GameSpeed);
+                    }
                 }
-                    break;
+                else
+                {
+                    if(!(Invencivel || isDashing || ShieldAtivo))
+                    {
+                        danoRed = true;
+                        danoBlue = false;
+                        danoGreen = false;
+                        TomarDano(2);
+                        StartCoroutine("Invencibilidade", 3.0f / GameController.instance.GameSpeed);
+                    }
+                }
+                        break;
 
             case "InimigoBlue":
-                if(!(Invencivel || isDashing)){
-                    danoRed = false;
-                    danoBlue = true;
-                    danoGreen = false;
-                    TomarDano(2);
-                    StartCoroutine("Invencibilidade", 3.0f);
+                if(DM != null)
+                {
+                    if(!(Invencivel || isDashing || ShieldAtivo || DM.DialogueBoxOpen)){
+                        danoRed = false;
+                        danoBlue = true;
+                        danoGreen = false;
+                        TomarDano(2);
+                        StartCoroutine("Invencibilidade", 3.0f / GameController.instance.GameSpeed);
+                    }
                 }
-                    break;
+                else
+                {
+                    if(!(Invencivel || isDashing || ShieldAtivo)){
+                        danoRed = false;
+                        danoBlue = true;
+                        danoGreen = false;
+                        TomarDano(2);
+                        StartCoroutine("Invencibilidade", 3.0f / GameController.instance.GameSpeed);
+                    }
+                }
+                        break;
 
             case "InimigoGreen":
-                if(!(Invencivel || isDashing)){
-                    danoRed = false;
-                    danoBlue = false;
-                    danoGreen = true;
-                    TomarDano(2);
-                    StartCoroutine("Invencibilidade", 3.0f);
+                if(DM != null)
+                {
+                    if(!(Invencivel || isDashing || ShieldAtivo || DM.DialogueBoxOpen)){
+                        danoRed = false;
+                        danoBlue = false;
+                        danoGreen = true;
+                        TomarDano(2);
+                        StartCoroutine("Invencibilidade", 3.0f / GameController.instance.GameSpeed);
+                    }
                 }
-                    break;
+                else
+                {
+                    if(!(Invencivel || isDashing || ShieldAtivo)){
+                        danoRed = false;
+                        danoBlue = false;
+                        danoGreen = true;
+                        TomarDano(2);
+                        StartCoroutine("Invencibilidade", 3.0f / GameController.instance.GameSpeed);
+                    }
+                }
+                        break;
 
             case "ProjetilRedInimigo":
-                if(!(Invencivel || isDashing)){
-                    danoRed = true;
-                    danoBlue = false;
-                    danoGreen = false;
-                    TomarDano(1);
-                    StartCoroutine("Invencibilidade", 3.0f);
+                if(DM != null)
+                {
+                    if(!(Invencivel || isDashing || ShieldAtivo || DM.DialogueBoxOpen)){
+                        danoRed = true;
+                        danoBlue = false;
+                        danoGreen = false;
+                        TomarDano(1);
+                        StartCoroutine("Invencibilidade", 3.0f / GameController.instance.GameSpeed);
+                    }
                 }
-                break;
+                else
+                {
+                    if(!(Invencivel || isDashing || ShieldAtivo)){
+                        danoRed = true;
+                        danoBlue = false;
+                        danoGreen = false;
+                        TomarDano(1);
+                        StartCoroutine("Invencibilidade", 3.0f / GameController.instance.GameSpeed);
+                    }
+                }
+                        break;
 
             case "ProjetilBlueInimigo":
-                if(!(Invencivel || isDashing)){
-                    danoRed = false;
-                    danoBlue = true;
-                    danoGreen = false;
-                    TomarDano(1);
-                    StartCoroutine("Invencibilidade", 3.0f);
+                if(DM != null)
+                {
+                    if(!(Invencivel || isDashing || ShieldAtivo || DM.DialogueBoxOpen)){
+                        danoRed = false;
+                        danoBlue = true;
+                        danoGreen = false;
+                        TomarDano(1);
+                        StartCoroutine("Invencibilidade", 3.0f / GameController.instance.GameSpeed);
+                    }
                 }
-                break;
+                else
+                {
+                    if(!(Invencivel || isDashing || ShieldAtivo)){
+                        danoRed = false;
+                        danoBlue = true;
+                        danoGreen = false;
+                        TomarDano(1);
+                        StartCoroutine("Invencibilidade", 3.0f / GameController.instance.GameSpeed);
+                    }
+                }
+                        break;
 
             case "ProjetilGreenInimigo":
-                if(!(Invencivel || isDashing)){
-                    danoRed = false;
-                    danoBlue = false;
-                    danoGreen = true;
-                    TomarDano(1);
-                    StartCoroutine("Invencibilidade", 3.0f);
+                if(DM != null)
+                {
+                    if(!(Invencivel || isDashing || ShieldAtivo || DM.DialogueBoxOpen)){
+                        danoRed = false;
+                        danoBlue = false;
+                        danoGreen = true;
+                        TomarDano(1);
+                        StartCoroutine("Invencibilidade", 3.0f / GameController.instance.GameSpeed);
+                    }
                 }
-                break;
+                else
+                {
+                    if(!(Invencivel || isDashing || ShieldAtivo)){
+                        danoRed = false;
+                        danoBlue = false;
+                        danoGreen = true;
+                        TomarDano(1);
+                        StartCoroutine("Invencibilidade", 3.0f / GameController.instance.GameSpeed);
+                    }
+                }
+                        break;
 
             case "PowerUpRed":
                 PowerUpRed();
@@ -254,9 +414,11 @@ public class Player : MonoBehaviour
                 Destroy(col.gameObject);
                 break;
 
-            case "Dialogo":
-                col.GetComponent<DialogueTrigger>().TriggerDialogue();
+            case "PowerUpShieldBronze":
+                StartCoroutine("Escudo", 10.0f / GameController.instance.GameSpeed);
+                Destroy(col.gameObject);
                 break;
+
         }
     }
 
@@ -378,6 +540,19 @@ public class Player : MonoBehaviour
         Invencivel = true;
         yield return new WaitForSeconds(segundosInvencivel);
         Invencivel = false;
+    }
+
+    IEnumerator Escudo(float Duracao)
+    {
+        ShieldAtivo = true;
+        Shield.GetComponent<Animator>().SetTrigger("Pegou");
+        Shield.GetComponent<Collider2D>().enabled = true;
+        yield return new WaitForSeconds(Duracao * 0.75f);
+        Shield.GetComponent<Animator>().SetTrigger("Terminando");
+        yield return new WaitForSeconds(Duracao * 0.25f);
+        Shield.GetComponent<Animator>().SetTrigger("Terminou");
+        ShieldAtivo = false;
+        Shield.GetComponent<Collider2D>().enabled = false;
     }
 
 }

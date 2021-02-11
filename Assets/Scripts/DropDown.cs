@@ -41,8 +41,6 @@ public class DropDown : MonoBehaviour
         selecionado = Drop.value; 
         palavra = Drop.options[selecionado].text.ToLower();
         
-        Debug.Log(selecionado);
-        Debug.Log(palavra);
         switch (gameObject.tag)
         {
             case "InimigoRed":

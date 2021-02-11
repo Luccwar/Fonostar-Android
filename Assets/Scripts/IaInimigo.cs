@@ -5,6 +5,7 @@ using UnityEngine;
 public class IaInimigo : MonoBehaviour
 {
     private GameController GameController;
+    private DialogueManager DialogueManager;
     public int pontosGanhos;
 
     private Rigidbody2D inimigoRigidbody;
@@ -38,6 +39,7 @@ public class IaInimigo : MonoBehaviour
     void Start()
     {
         GameController = FindObjectOfType(typeof(GameController)) as GameController;
+        DialogueManager = FindObjectOfType(typeof(DialogueManager)) as DialogueManager;
         inimigoRigidbody = GetComponent<Rigidbody2D>();
         //inimigoAnimator = GetComponent<Animator>();
         movimentoX = -1;
@@ -72,7 +74,7 @@ public class IaInimigo : MonoBehaviour
             inimigoRigidbody.velocity = new Vector2(movimentoX * velocidadeX * GameController.instance.GameSpeed, movimentoY * velocidadeY * GameController.instance.GameSpeed);
         }
 
-        if(tempTimeTiro >= tempoTiro / GameController.instance.GameSpeed)
+        if(tempTimeTiro >= tempoTiro / GameController.instance.GameSpeed && GetComponent<Renderer>().isVisible)
         {
             tempTimeTiro = 0;
             rand = Random.Range(0,100);
@@ -98,7 +100,17 @@ public class IaInimigo : MonoBehaviour
         switch (col.gameObject.tag)
         {
             case "Player":
-                Explodir();
+                if(DialogueManager != null)
+                {
+                    if(!DialogueManager.DialogueBoxOpen)
+                    {
+                        Explodir();
+                    }
+                }
+                else
+                {
+                    Explodir();
+                }
                 break;
             case "PlayerInvencivel":
                 break;
@@ -110,8 +122,18 @@ public class IaInimigo : MonoBehaviour
         switch (col.gameObject.tag)
         {
             case "Player":
-                Explodir();
-                break;
+                if(DialogueManager != null)
+                {
+                    if(!DialogueManager.DialogueBoxOpen)
+                    {
+                        Explodir();
+                    }
+                }
+                else
+                {
+                    Explodir();
+                }
+                    break;
             case "PlayerInvencivel":
                 break;
         }
@@ -120,6 +142,7 @@ public class IaInimigo : MonoBehaviour
             switch (col.gameObject.tag)
             {
                 case "ProjetilRedPlayer":
+                if(GetComponent<Renderer>().isVisible)
                     TomarDano(col.gameObject.GetComponent<DanoTiroRed>().dano);
                     break;
             }
@@ -128,6 +151,7 @@ public class IaInimigo : MonoBehaviour
             switch (col.gameObject.tag)
             {
                 case "ProjetilBluePlayer":
+                if(GetComponent<Renderer>().isVisible)
                     TomarDano(col.gameObject.GetComponent<DanoTiroBlue>().dano);
                     break;
             }
@@ -136,6 +160,7 @@ public class IaInimigo : MonoBehaviour
             switch (col.gameObject.tag)
             {
                 case "ProjetilGreenPlayer":
+                if(GetComponent<Renderer>().isVisible)
                     TomarDano(col.gameObject.GetComponent<DanoTiroGreen>().dano);
                     break;
             }

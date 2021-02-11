@@ -12,6 +12,13 @@ public class OnTriggerTiroInimigo : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
+        else if(col.gameObject.tag == "Shield")
+        {
+            if(!col.isTrigger)
+            {
+                Destroy(this.gameObject);
+            }
+        }
 
     }
 }

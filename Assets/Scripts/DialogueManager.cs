@@ -1,54 +1,58 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
+    private GameController GC;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
-    public TextMeshProUGUI textoNaTela;
-    public bool usaTextoTela;
-    public bool Texto;
-
     public Animator animator;
-
-    public Animator animatorRetrato;
-    private bool IsSpeaking;
-
-    public bool desconhecido;
-    private int numSentences;
-    private int totalSentences;
-    private string nomePosApresentacao;
-
+    public Animator animatorFoto;
+    private Queue<string> names;
     private Queue<string> sentences;
+    private IEnumerator Typer;
+    public bool DialogueBoxOpen;
+    private DialogueContinueButton buttonContinue;
+    private bool IsDone = true;
+    private bool FirstDialogue = true;
+    public TextMeshProUGUI ButtonText;
+    
     // Start is called before the first frame update
     void Start()
     {
+        GC = FindObjectOfType(typeof(GameController)) as GameController;
+        names = new Queue<string>();
         sentences = new Queue<string>();
+        buttonContinue = FindObjectOfType<DialogueContinueButton>();
     }
 
-    void Update()
-    {
-        animatorRetrato.SetBool("IsSpeaking", IsSpeaking);
+    private void Update() {
+        animator.SetBool("IsOpen", DialogueBoxOpen);
+        if(sentences.Count == 0)
+        {
+            ButtonText.text = "Fechar";
+        }
+        else 
+        {
+            ButtonText.text = "Continuar";
+        }
     }
 
-    public void StartDialogue (Dialogue dialogue)
+    public void StartDialogue(Dialogue dialogue)
     {
-        desconhecido = dialogue.desconhecido;
-        animator.SetBool("IsOpen", true);
+        FirstDialogue = true;
+        dialogueText.text = "";
+        DialogueBoxOpen = true;
 
-        if(desconhecido)
-        {
-            nameText.text = "???";
-            nomePosApresentacao = dialogue.name;
-        }
-        else
-        {
-            nameText.text = dialogue.name;
-        }
-
+        names.Clear();
         sentences.Clear();
+
+        foreach (string name in dialogue.names)
+        {
+            names.Enqueue(name);
+        }
 
         foreach (string sentence in dialogue.sentences)
         {
@@ -60,81 +64,65 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextSentence()
     {
-        numSentences = sentences.Count;
-        if(totalSentences == 0)
+        if(IsDone)
         {
-            totalSentences = numSentences;
+            FirstDialogue = false;
+            if(sentences.Count == 0)
+            {
+                EndDialogue();
+                return;
+            }
+
+            string name = names.Dequeue();
+            string sentence = sentences.Dequeue();
+            dialogueText.text = "";
+            nameText.text = name;
+            Typer = Type(sentence, 0.05f);
+            StopCoroutine(Typer);
+            StartCoroutine(Typer);
         }
-        if(numSentences == totalSentences-1)
-        {
-            nameText.text = nomePosApresentacao;
-        }
-        if(sentences.Count == 0)
-        {
-            EndDialogue();
-            return;
-        }
-        string sentence = sentences.Dequeue();
-        StopAllCoroutines();
-        StartCoroutine(TypeSentence(sentence));
     }
 
     void EndDialogue()
     {
-        animator.SetBool("IsOpen", false);
-        if(usaTextoTela)
-        {
-            StartCoroutine(FadeInText(1, textoNaTela));
-        }
+        DialogueBoxOpen = false;
     }
 
-    IEnumerator TypeSentence (string sentence)
-    {
-        IsSpeaking = true;
-        dialogueText.text = "";
+    IEnumerator Type(string sentence, float typingSpeed){
+        IsDone = false;
         foreach (char letter in sentence.ToCharArray())
         {
             dialogueText.text += letter;
-            yield return new WaitForSeconds(0.03f);
+            yield return new WaitForSeconds(typingSpeed);
+            animatorFoto.SetBool("IsTalking", true);
+            if(buttonContinue.buttonPressed && !IsDone)
+            {
+                dialogueText.text = "";
+                dialogueText.text = sentence;
+                //StopCoroutine(Typer);
+                break;
+            }
         }
-        IsSpeaking = false;
+        yield return new WaitForSeconds(0.1f);
+        IsDone = true;
+        animatorFoto.SetBool("IsTalking", false);
     }
 
-    private IEnumerator FadeInText(float velocidadeTempo, TextMeshProUGUI texto)
+    public void DialogueBoxOpened()
     {
-        texto.color = new Color(texto.color.r, texto.color.g, texto.color.b, 0);
-        while (texto.color.a < 1.0f)
-        {
-            texto.color = new Color(texto.color.r, texto.color.g, texto.color.b, texto.color.a + (Time.deltaTime * velocidadeTempo));
-            yield return null;
-        }
-        Texto = true;
+        GC.joystick.GetComponent<Animator>().SetTrigger("Morreu");
+        GC.dashButton.GetComponent<Animator>().SetTrigger("Morreu");
+        GC.tiroRedButton.GetComponent<Animator>().SetTrigger("Morreu");
+        GC.tiroBlueButton.GetComponent<Animator>().SetTrigger("Morreu");
+        GC.tiroGreenButton.GetComponent<Animator>().SetTrigger("Morreu");
     }
-    private IEnumerator FadeOutText(float velocidadeTempo, TextMeshProUGUI texto)
+
+    public void DialogueBoxClosed()
     {
-        texto.color = new Color(texto.color.r, texto.color.g, texto.color.b, 1);
-        while (texto.color.a > 0.0f)
-        {
-            texto.color = new Color(texto.color.r, texto.color.g, texto.color.b, texto.color.a - (Time.deltaTime * velocidadeTempo));
-            yield return null;
-        }
-        Texto = false;
+        GC.joystick.GetComponent<Animator>().SetTrigger("Reapareceu");
+        GC.dashButton.GetComponent<Animator>().SetTrigger("Reapareceu");
+        GC.tiroRedButton.GetComponent<Animator>().SetTrigger("Reapareceu");
+        GC.tiroBlueButton.GetComponent<Animator>().SetTrigger("Reapareceu");
+        GC.tiroGreenButton.GetComponent<Animator>().SetTrigger("Reapareceu");
     }
-    /*public void FadeInText(float velocidadeTempo = -1.0f)
-    {
-        if (velocidadeTempo <= 0.0f)
-        {
-            velocidadeTempo = timeMultiplier;
-        }
-        StartCoroutine(FadeInText(velocidadeTempo, textoNaTela));
-    }
-    public void FadeOutText(float velocidadeTempo = -1.0f)
-    {
-        if (velocidadeTempo <= 0.0f)
-        {
-            velocidadeTempo = timeMultiplier;
-        }
-        StartCoroutine(FadeOutText(velocidadeTempo, textoNaTela));
-    }
-    */
 }

@@ -51,8 +51,15 @@ public class RespawnPanel : MonoBehaviour
 
     public void AnimacaoTerminou()
     {
-        GC.joystick.GetComponent<Animator>().SetTrigger("Morreu");
-        GC.dashButton.GetComponent<Animator>().SetTrigger("Morreu");
+        GC.joystick.GetComponent<Animator>().SetTrigger("Reapareceu");
+        GC.dashButton.GetComponent<Animator>().SetTrigger("Reapareceu");
+        GC.tiroRedButton.GetComponent<Animator>().SetTrigger("Reapareceu");
+        GC.tiroBlueButton.GetComponent<Animator>().SetTrigger("Reapareceu");
+        GC.tiroGreenButton.GetComponent<Animator>().SetTrigger("Reapareceu");
+        GC.tiroRedRespawnText.GetComponent<Animator>().SetTrigger("Reapareceu");
+        GC.tiroBlueRespawnText.GetComponent<Animator>().SetTrigger("Reapareceu");
+        GC.tiroGreenRespawnText.GetComponent<Animator>().SetTrigger("Reapareceu");
+
         if(GC.vidasExtras >= 0)
         {
             GC.Vidas();

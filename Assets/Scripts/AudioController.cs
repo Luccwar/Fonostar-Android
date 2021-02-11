@@ -24,6 +24,7 @@ public class AudioController : MonoBehaviour
     private AudioClip novaMusica;
     private string novaCena;
     private bool trocarCena;
+    public bool Dialogo;
     // Start is called before the first frame update
     void Start()
     {
