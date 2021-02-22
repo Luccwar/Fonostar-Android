@@ -31,6 +31,7 @@ public class IaInimigo : MonoBehaviour
     private int rand;
 
     public int HP;
+    public bool recebeDano;
     public GameObject ExplosaoPrefab;
 
     public GameObject Loot;
@@ -74,11 +75,11 @@ public class IaInimigo : MonoBehaviour
             inimigoRigidbody.velocity = new Vector2(movimentoX * velocidadeX * GameController.instance.GameSpeed, movimentoY * velocidadeY * GameController.instance.GameSpeed);
         }
 
-        if(tempTimeTiro >= tempoTiro / GameController.instance.GameSpeed && GetComponent<Renderer>().isVisible)
+        if(tempTimeTiro >= tempoTiro / GameController.instance.GameSpeed)
         {
             tempTimeTiro = 0;
             rand = Random.Range(0,100);
-            if (rand <= chanceTiro)
+            if (rand <= chanceTiro && recebeDano)
             {
                 Atirar();
             }
@@ -142,7 +143,7 @@ public class IaInimigo : MonoBehaviour
             switch (col.gameObject.tag)
             {
                 case "ProjetilRedPlayer":
-                if(GetComponent<Renderer>().isVisible)
+                if(recebeDano)
                     TomarDano(col.gameObject.GetComponent<DanoTiroRed>().dano);
                     break;
             }
@@ -151,7 +152,7 @@ public class IaInimigo : MonoBehaviour
             switch (col.gameObject.tag)
             {
                 case "ProjetilBluePlayer":
-                if(GetComponent<Renderer>().isVisible)
+                if(recebeDano)
                     TomarDano(col.gameObject.GetComponent<DanoTiroBlue>().dano);
                     break;
             }
@@ -160,7 +161,7 @@ public class IaInimigo : MonoBehaviour
             switch (col.gameObject.tag)
             {
                 case "ProjetilGreenPlayer":
-                if(GetComponent<Renderer>().isVisible)
+                if(recebeDano)
                     TomarDano(col.gameObject.GetComponent<DanoTiroGreen>().dano);
                     break;
             }
@@ -191,5 +192,15 @@ public class IaInimigo : MonoBehaviour
             }
 
             Destroy(this.gameObject);
+    }
+
+    void OnBecameVisible()
+    {
+        recebeDano = true;
+    }
+
+    void OnBecameInvisible()
+    {
+        recebeDano = false;
     }
 }

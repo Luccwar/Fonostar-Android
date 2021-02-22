@@ -202,7 +202,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 85088717}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 858663468}
+        m_MethodName: SelecionarFase
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: CenaTesteDialogoRED
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &85088717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3098,7 +3109,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 708589747}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 858663468}
+        m_MethodName: SelecionarFase
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: CenaTesteDialogoGRE
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &708589747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8679,7 +8701,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1772770672}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 858663468}
+        m_MethodName: SelecionarFase
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: CenaTesteDialogoBLU
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1772770672
 MonoBehaviour:
   m_ObjectHideFlags: 0

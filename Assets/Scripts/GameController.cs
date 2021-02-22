@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour
     private AudioController AC;
     private PauseController PC;
     private DialogueManager DM;
+    public DialogueTrigger DT;
     private RespawnPanel panelRespawn;
     [HideInInspector]
     public GameObject tiroRedRespawnText;
@@ -21,6 +22,7 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI tiroRedRespawnProText;
     public TextMeshProUGUI tiroBlueRespawnProText;
     public TextMeshProUGUI tiroGreenRespawnProText;
+    private SpawnPanel panelSpawn;
     public TextMeshProUGUI tiroRedSpawnProText;
     public TextMeshProUGUI tiroBlueSpawnProText;
     public TextMeshProUGUI tiroGreenSpawnProText;
@@ -50,7 +52,7 @@ public class GameController : MonoBehaviour
     public int LevaAtual;
     public int InimigosRestantes;
     public bool Fase;
-
+    public bool comecaDialogo;
     // Start is called before the first frame update
     private void Awake() 
     {
@@ -58,6 +60,11 @@ public class GameController : MonoBehaviour
             instance = this;
         if(instance != this)
             Destroy(gameObject);
+        if(comecaDialogo)
+        {
+            DM = FindObjectOfType(typeof(DialogueManager)) as DialogueManager;
+            DM.DialogueBoxFakeOpen = true;
+        }
     }
 
     void Start()
@@ -66,6 +73,7 @@ public class GameController : MonoBehaviour
         PC = FindObjectOfType(typeof(PauseController)) as PauseController;
         DM = FindObjectOfType(typeof(DialogueManager)) as DialogueManager;
         panelRespawn = FindObjectOfType(typeof(RespawnPanel)) as RespawnPanel;
+        panelSpawn = FindObjectOfType(typeof(SpawnPanel)) as SpawnPanel;
         panelVenceu = GameObject.Find("/Canvas/PanelVenceu");
         joystick = GameObject.Find("/Canvas/Fixed Joystick");
         dashButton = GameObject.Find("/Canvas/DashButton");
@@ -84,7 +92,20 @@ public class GameController : MonoBehaviour
         tiroRedSpawnProText.text = PlayerPrefs.GetString("TiroRed");
         tiroBlueSpawnProText.text = PlayerPrefs.GetString("TiroBlue");
         tiroGreenSpawnProText.text = PlayerPrefs.GetString("TiroGreen");
-        LevasInimigos[LevaAtual].SetActive(true);
+        if(panelSpawn == null)
+        {
+            Vidas();
+        }
+        
+        DT = GetComponent<DialogueTrigger>();
+        if(Fase)
+        {
+            LevasInimigos[LevaAtual].SetActive(true);
+        }
+        else if(comecaDialogo)
+        {
+            //DT.TriggerDialogue();
+        }
     }
 
     // Update is called once per frame
@@ -94,7 +115,18 @@ public class GameController : MonoBehaviour
         {
             pontuacao.text = pontos.ToString();
         }
-        ContarInimigos();
+        if(!comecaDialogo)
+        {
+            ContarInimigos();
+        }
+        if(comecaDialogo)
+        {
+            if(!DM.DialogueBoxFakeOpen)
+            {
+                LevasInimigos[LevaAtual].SetActive(true);
+                ContarInimigos();
+            }
+        }
     }
 
     public void Vidas()
@@ -159,7 +191,7 @@ public class GameController : MonoBehaviour
 
         if(InimigosRestantes == 0)
         {
-            if(LevasInimigos.Length-1 <= LevaAtual && Fase)
+            if(LevasInimigos.Length-1 <= LevaAtual)
             {
                 panelVenceu.GetComponent<Animator>().SetTrigger("Terminou");
                 joystick.GetComponent<Animator>().SetTrigger("Morreu");

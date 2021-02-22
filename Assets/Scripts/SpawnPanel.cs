@@ -25,11 +25,18 @@ public class SpawnPanel : MonoBehaviour
 
     public void AnimacaoTerminou()
     {
-        GC.joystick.GetComponent<Animator>().SetTrigger("Reapareceu");
-        GC.dashButton.GetComponent<Animator>().SetTrigger("Reapareceu");
-        GC.tiroRedButton.GetComponent<Animator>().SetTrigger("Reapareceu");
-        GC.tiroBlueButton.GetComponent<Animator>().SetTrigger("Reapareceu");
-        GC.tiroGreenButton.GetComponent<Animator>().SetTrigger("Reapareceu");
+        if(GC.comecaDialogo)
+        {
+            GC.DT.TriggerDialogue();
+        }
+        else
+        {
+            GC.joystick.GetComponent<Animator>().SetTrigger("Reapareceu");
+            GC.dashButton.GetComponent<Animator>().SetTrigger("Reapareceu");
+            GC.tiroRedButton.GetComponent<Animator>().SetTrigger("Reapareceu");
+            GC.tiroBlueButton.GetComponent<Animator>().SetTrigger("Reapareceu");
+            GC.tiroGreenButton.GetComponent<Animator>().SetTrigger("Reapareceu");
+        }
 
         GC.Vidas();
         GameController.instance.GameSpeed = 1.0f;

@@ -14,13 +14,14 @@ public class DialogueManager : MonoBehaviour
     private Queue<string> sentences;
     private IEnumerator Typer;
     public bool DialogueBoxOpen;
+    public bool DialogueBoxFakeOpen;
     private DialogueContinueButton buttonContinue;
     private bool IsDone = true;
     private bool FirstDialogue = true;
     public TextMeshProUGUI ButtonText;
     
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         GC = FindObjectOfType(typeof(GameController)) as GameController;
         names = new Queue<string>();
@@ -30,7 +31,7 @@ public class DialogueManager : MonoBehaviour
 
     private void Update() {
         animator.SetBool("IsOpen", DialogueBoxOpen);
-        if(sentences.Count == 0)
+        if(sentences.Count == 0 && IsDone)
         {
             ButtonText.text = "Fechar";
         }
@@ -77,7 +78,7 @@ public class DialogueManager : MonoBehaviour
             string sentence = sentences.Dequeue();
             dialogueText.text = "";
             nameText.text = name;
-            Typer = Type(sentence, 0.05f);
+            Typer = Type(sentence, 0.025f);
             StopCoroutine(Typer);
             StartCoroutine(Typer);
         }
@@ -85,6 +86,7 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
+        DialogueBoxFakeOpen = false;
         DialogueBoxOpen = false;
     }
 
@@ -103,7 +105,7 @@ public class DialogueManager : MonoBehaviour
                 break;
             }
         }
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.25f);
         IsDone = true;
         animatorFoto.SetBool("IsTalking", false);
     }

@@ -29,4 +29,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: c98c7fc7949134940acfd64f0b9919e1
+  - enabled: 1
+    path: Assets/Scenes/CenaTesteDialogoBLU.unity
+    guid: 838a97ec84ef8ca4caf8d72acba3c7fc
+  - enabled: 1
+    path: Assets/Scenes/CenaTesteDialogoGRE.unity
+    guid: 011f4dcc868fc1547909bc245a87df3e
+  - enabled: 1
+    path: Assets/Scenes/CenaTesteDialogoRED.unity
+    guid: f3646054979087b4abcc0da25599cdf7
   m_configObjects: {}

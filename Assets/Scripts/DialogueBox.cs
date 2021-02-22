@@ -12,7 +12,7 @@ public class DialogueBox : MonoBehaviour
 
     public void DialogueBoxOpened()
     {
-        DM.DialogueBoxOpened();
+        //DM.DialogueBoxOpened();
     }
 
     public void DialogueBoxClosed()
