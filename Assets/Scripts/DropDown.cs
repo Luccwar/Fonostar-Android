@@ -9,11 +9,32 @@ public class DropDown : MonoBehaviour
     public TMPro.TMP_Dropdown Drop;
     private int selecionado;
     private string palavra;
+    private int palavrasConfiguradas;
 
 
+    void Awake()
+    {
+        palavrasConfiguradas = PlayerPrefs.GetInt("palavrasConfig");
+        if(palavrasConfiguradas == 0)
+        {
+            PlayerPrefs.SetString("TiroRed", "pão");
+            PlayerPrefs.SetInt("DropRedSelecionado", 0);
+            PlayerPrefs.SetString("TiroBlue", "rato");
+            PlayerPrefs.SetInt("DropBlueSelecionado", 1);
+            PlayerPrefs.SetString("TiroGreen", "vaso");
+            PlayerPrefs.SetInt("DropGreenSelecionado", 2);
+            palavrasConfiguradas = 1;
+            PlayerPrefs.SetInt("palavrasConfig", 1);
+        }
+        else
+        {
+            return;
+        }
+    }
     void Start()
     {
         Drop = GetComponent<TMP_Dropdown>();
+
         switch (gameObject.tag)
         {
             case "InimigoRed":

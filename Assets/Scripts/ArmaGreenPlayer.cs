@@ -30,10 +30,13 @@ public class ArmaGreenPlayer : MonoBehaviour
         {
             AtirarGreen();
         }
-        if(botaoTiro.GetComponent<JoyButton>().Pressed && tempoTiro == 0 && GameController.instance.GameSpeed > 0.1f)
+        if(botaoTiro != null)
         {
-            AtirarGreen();
-            tempoTiro = tempoTiroBase;
+            if(botaoTiro.GetComponent<JoyButton>().Pressed && tempoTiro == 0 && GameController.instance.GameSpeed > 0.1f)
+            {
+                AtirarGreen();
+                tempoTiro = tempoTiroBase;
+            }
         }
     }
 

@@ -850,6 +850,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52ba5ad7ec1b8f54bb586dbae66a349b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DT: {fileID: 0}
   tiroRedRespawnText: {fileID: 0}
   tiroBlueRespawnText: {fileID: 0}
   tiroGreenRespawnText: {fileID: 0}
@@ -890,6 +891,7 @@ MonoBehaviour:
   LevaAtual: 0
   InimigosRestantes: 0
   Fase: 1
+  comecaDialogo: 0
 --- !u!4 &190010683
 Transform:
   m_ObjectHideFlags: 0
@@ -2264,16 +2266,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bad3fd5c761d5a48af6f36cb3455ab9, type: 3}
+  m_Script: {fileID: 11500000, guid: d9f273274f8c16e46af2010fe2969d19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  referenceMode: 0
-  x: 16
-  y: 8
-  width: 2280
-  height: 1080
-  onAwake: 1
-  onUpdate: 0
+  _wantedAspectRatio: 1.955556
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0

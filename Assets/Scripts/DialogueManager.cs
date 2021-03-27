@@ -114,8 +114,11 @@ public class DialogueManager : MonoBehaviour
     {
         GC.joystick.GetComponent<Animator>().SetTrigger("Morreu");
         GC.dashButton.GetComponent<Animator>().SetTrigger("Morreu");
+        if(GC.tiroRedButton != null)
         GC.tiroRedButton.GetComponent<Animator>().SetTrigger("Morreu");
+        if(GC.tiroBlueButton != null)
         GC.tiroBlueButton.GetComponent<Animator>().SetTrigger("Morreu");
+        if(GC.tiroGreenButton != null)
         GC.tiroGreenButton.GetComponent<Animator>().SetTrigger("Morreu");
     }
 
@@ -123,8 +126,11 @@ public class DialogueManager : MonoBehaviour
     {
         GC.joystick.GetComponent<Animator>().SetTrigger("Reapareceu");
         GC.dashButton.GetComponent<Animator>().SetTrigger("Reapareceu");
+        if(GC.tiroRedButton != null)
         GC.tiroRedButton.GetComponent<Animator>().SetTrigger("Reapareceu");
+        if(GC.tiroBlueButton != null)
         GC.tiroBlueButton.GetComponent<Animator>().SetTrigger("Reapareceu");
+        if(GC.tiroGreenButton != null)
         GC.tiroGreenButton.GetComponent<Animator>().SetTrigger("Reapareceu");
     }
 }

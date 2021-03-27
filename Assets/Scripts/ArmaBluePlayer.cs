@@ -30,10 +30,13 @@ public class ArmaBluePlayer : MonoBehaviour
         {
             AtirarBlue();
         }
-        if(botaoTiro.GetComponent<JoyButton>().Pressed && tempoTiro == 0 && GameController.instance.GameSpeed > 0.1f)
+        if(botaoTiro != null)
         {
-            AtirarBlue();
-            tempoTiro = tempoTiroBase;
+            if(botaoTiro.GetComponent<JoyButton>().Pressed && tempoTiro == 0 && GameController.instance.GameSpeed > 0.1f)
+            {
+                AtirarBlue();
+                tempoTiro = tempoTiroBase;
+            }
         }
     }
 

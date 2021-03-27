@@ -30,10 +30,13 @@ public class ArmaRedPlayer : MonoBehaviour
         {
             AtirarRed();
         }
-        if(botaoTiro.GetComponent<JoyButton>().Pressed && tempoTiro == 0 && GameController.instance.GameSpeed > 0.1f)
+        if(botaoTiro != null)
         {
-            AtirarRed();
-            tempoTiro = tempoTiroBase;
+            if(botaoTiro.GetComponent<JoyButton>().Pressed && tempoTiro == 0 && GameController.instance.GameSpeed > 0.1f)
+            {
+                AtirarRed();
+                tempoTiro = tempoTiroBase;
+            }
         }
     }
 

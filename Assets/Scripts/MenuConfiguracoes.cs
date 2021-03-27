@@ -10,22 +10,26 @@ public class MenuConfiguracoes : MonoBehaviour
 
     public AudioMixer audioMixer;
 
-    private GameObject MenuCanvas, ConfiguracoesCanvas, SelecaoFaseCanvas;
+    private GameObject MenuCanvas, ConfiguracoesCanvas, ConfigAudioCanvas, ConfigNaveCanvas, SelecaoFaseCanvas;
     public Slider volumeSlider;
 
     private void Start() {
         AC = FindObjectOfType(typeof(AudioController)) as AudioController;
         MenuCanvas = GameObject.Find("MenuCanvas");
         ConfiguracoesCanvas = GameObject.Find("ConfiguracoesCanvas");
+        ConfigAudioCanvas = GameObject.Find("ConfiguracoesAudioCanvas");
+        ConfigNaveCanvas = GameObject.Find("ConfiguracoesNaveCanvas");
         SelecaoFaseCanvas = GameObject.Find("SelecaoFaseCanvas");
         ConfiguracoesCanvas.SetActive(false);
+        ConfigAudioCanvas.SetActive(false);
+        ConfigNaveCanvas.SetActive(false);
         SelecaoFaseCanvas.SetActive(false);
         volumeSlider.value = PlayerPrefs.GetFloat("Volume");
     }
 
     public void Comecar()
     {
-        AC.TrocarMusica(AC.MusicaFase1, "CenaTesteFacil", true);
+        AC.TrocarMusica(AC.MusicaFase1, "CenaTesteDialogoBLU", true);
     }
 
     public void RetornarAoMenuPrincipal()
@@ -38,7 +42,21 @@ public class MenuConfiguracoes : MonoBehaviour
     public void AbrirConfiguracoes()
     {
         MenuCanvas.SetActive(false);
+        ConfigAudioCanvas.SetActive(false);
+        ConfigNaveCanvas.SetActive(false);
         ConfiguracoesCanvas.SetActive(true);
+    }
+
+    public void AbrirConfigAudio()
+    {
+        ConfiguracoesCanvas.SetActive(false);
+        ConfigAudioCanvas.SetActive(true);
+    }
+
+    public void AbrirConfigNave()
+    {
+        ConfiguracoesCanvas.SetActive(false);
+        ConfigNaveCanvas.SetActive(true);
     }
 
     public void AbrirSelecaoFase()
