@@ -99,4 +99,45 @@ public class MenuConfiguracoes : MonoBehaviour
         }
         PlayerPrefs.SetFloat("Volume", volumeSlider.value);
     }
+
+    public void PianoKey1()
+    {
+        AC.tocarFX(AC.PianoKey1, 1);
+    }
+
+    public void PianoKey2()
+    {
+        AC.tocarFX(AC.PianoKey2, 1);
+    }
+
+    public void PianoKey3()
+    {
+        AC.tocarFX(AC.PianoKey3, 1);
+    }
+
+    public void PianoKey4()
+    {
+        AC.tocarFX(AC.PianoKey4, 1);
+    }
+
+    public void PianoKey5()
+    {
+        AC.tocarFX(AC.PianoKey5, 1);
+    }
+
+    public void PianoKey6()
+    {
+        AC.tocarFX(AC.PianoKey6, 1);
+    }
+
+    public void PianoKey7()
+    {
+        AC.tocarFX(AC.PianoKey7, 1);
+    }
+
+    public void PianoKey8()
+    {
+        AC.tocarFX(AC.PianoKey8, 1);
+    }
+
 }

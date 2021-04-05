@@ -15,6 +15,8 @@ public class AudioController : MonoBehaviour
 
     [Header("FX")]
     public AudioClip FxClick;
+    public AudioClip PianoKey1, PianoKey2, PianoKey3, PianoKey4, PianoKey5, PianoKey6, PianoKey7, PianoKey8;
+
 
     //Configurações dos audios
     private float volumeMaximoMusica;
@@ -67,6 +69,17 @@ public class AudioController : MonoBehaviour
         {
             SceneManager.LoadScene(novaCena);
         }
+    }
+
+    public void tocarFX(AudioClip FX, float Volume)
+    {
+        float tempVolume = Volume;
+        if(Volume >= volumeMaximoFx)
+        {
+            tempVolume = volumeMaximoFx;
+        }
+        sourceFx.volume = tempVolume;
+        sourceFx.PlayOneShot(FX);
     }
 
 }
