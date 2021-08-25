@@ -53,8 +53,11 @@ public class RespawnPanel : MonoBehaviour
     {
         GC.joystick.GetComponent<Animator>().SetTrigger("Reapareceu");
         GC.dashButton.GetComponent<Animator>().SetTrigger("Reapareceu");
+        if(GC.tiroRedButton!=null)
         GC.tiroRedButton.GetComponent<Animator>().SetTrigger("Reapareceu");
+        if(GC.tiroBlueButton!=null)
         GC.tiroBlueButton.GetComponent<Animator>().SetTrigger("Reapareceu");
+        if(GC.tiroGreenButton!=null)
         GC.tiroGreenButton.GetComponent<Animator>().SetTrigger("Reapareceu");
         GC.tiroRedRespawnText.GetComponent<Animator>().SetTrigger("Reapareceu");
         GC.tiroBlueRespawnText.GetComponent<Animator>().SetTrigger("Reapareceu");

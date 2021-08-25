@@ -6,6 +6,7 @@ using TMPro;
 public class DialogueManager : MonoBehaviour
 {
     private GameController GC;
+    private PauseController PC;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
     public Animator animator;
@@ -24,6 +25,7 @@ public class DialogueManager : MonoBehaviour
     void Awake()
     {
         GC = FindObjectOfType(typeof(GameController)) as GameController;
+        PC = FindObjectOfType(typeof(PauseController)) as PauseController;
         names = new Queue<string>();
         sentences = new Queue<string>();
         buttonContinue = FindObjectOfType<DialogueContinueButton>();
@@ -38,6 +40,10 @@ public class DialogueManager : MonoBehaviour
         else 
         {
             ButtonText.text = "Continuar";
+        }
+        if(DialogueBoxOpen)
+        {
+            PC.pauseButton.interactable = false;
         }
     }
 
@@ -88,6 +94,7 @@ public class DialogueManager : MonoBehaviour
     {
         DialogueBoxFakeOpen = false;
         DialogueBoxOpen = false;
+        PC.pauseButton.interactable = true;
     }
 
     IEnumerator Type(string sentence, float typingSpeed){

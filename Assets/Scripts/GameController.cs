@@ -164,8 +164,11 @@ public class GameController : MonoBehaviour
         vidasExtras -= 1;
         joystick.GetComponent<Animator>().SetTrigger("Morreu");
         dashButton.GetComponent<Animator>().SetTrigger("Morreu");
+        if(tiroRedButton!=null)
         tiroRedButton.GetComponent<Animator>().SetTrigger("Morreu");
+        if(tiroBlueButton!=null)
         tiroBlueButton.GetComponent<Animator>().SetTrigger("Morreu");
+        if(tiroGreenButton!=null)
         tiroGreenButton.GetComponent<Animator>().SetTrigger("Morreu");
         tiroRedRespawnText.GetComponent<Animator>().SetTrigger("Morreu");
         tiroBlueRespawnText.GetComponent<Animator>().SetTrigger("Morreu");
@@ -196,8 +199,11 @@ public class GameController : MonoBehaviour
                 panelVenceu.GetComponent<Animator>().SetTrigger("Terminou");
                 joystick.GetComponent<Animator>().SetTrigger("Morreu");
                 dashButton.GetComponent<Animator>().SetTrigger("Morreu");
+                if(tiroRedButton!=null)
                 tiroRedButton.GetComponent<Animator>().SetTrigger("Morreu");
+                if(tiroBlueButton!=null)
                 tiroBlueButton.GetComponent<Animator>().SetTrigger("Morreu");
+                if(tiroGreenButton!=null)
                 tiroGreenButton.GetComponent<Animator>().SetTrigger("Morreu");
                 PC.pauseButton.interactable = false;
                 GameSpeed = 0f;

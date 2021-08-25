@@ -52,9 +52,6 @@ public class VoiceController : MonoBehaviour
 
     void FixedUpdate() {
         StartListening();
-        Debug.Log(palavraRed);
-        Debug.Log(palavraBlue);
-        Debug.Log(palavraGreen);
     }
 
     void CheckPermission()
