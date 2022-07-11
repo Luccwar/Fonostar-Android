@@ -10,7 +10,7 @@ public class MenuConfiguracoes : MonoBehaviour
 
     public AudioMixer audioMixer;
 
-    private GameObject MenuCanvas, ConfiguracoesCanvas, ConfigAudioCanvas, ConfigNaveCanvas, SelecaoFaseCanvas;
+    private GameObject MenuCanvas, ConfiguracoesCanvas, ConfigAudioCanvas, ConfigNaveCanvas, SelecaoFaseCanvas, TutorialCanvas;
     public Slider volumeSlider;
 
     private void Start() {
@@ -20,10 +20,12 @@ public class MenuConfiguracoes : MonoBehaviour
         ConfigAudioCanvas = GameObject.Find("ConfiguracoesAudioCanvas");
         ConfigNaveCanvas = GameObject.Find("ConfiguracoesNaveCanvas");
         SelecaoFaseCanvas = GameObject.Find("SelecaoFaseCanvas");
+        TutorialCanvas = GameObject.Find("TutorialCanvas");
         ConfiguracoesCanvas.SetActive(false);
         ConfigAudioCanvas.SetActive(false);
         ConfigNaveCanvas.SetActive(false);
         SelecaoFaseCanvas.SetActive(false);
+        TutorialCanvas.SetActive(false);
         volumeSlider.value = PlayerPrefs.GetFloat("Volume");
     }
 
@@ -36,6 +38,7 @@ public class MenuConfiguracoes : MonoBehaviour
     {
         ConfiguracoesCanvas.SetActive(false);
         SelecaoFaseCanvas.SetActive(false);
+        TutorialCanvas.SetActive(false);
         MenuCanvas.SetActive(true);
     }
 
@@ -63,6 +66,12 @@ public class MenuConfiguracoes : MonoBehaviour
     {
         MenuCanvas.SetActive(false);
         SelecaoFaseCanvas.SetActive(true);
+    }
+
+    public void AbrirTelaTutorial()
+    {
+        MenuCanvas.SetActive(false);
+        TutorialCanvas.SetActive(true);
     }
 
     public void SelecionarFase(string NomeFase)

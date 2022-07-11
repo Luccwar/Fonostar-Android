@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private GameController GC;
-    private VoiceController VC;
+    //private VoiceController VC;
     private DialogueManager DM;
     private Rigidbody2D  playerRigidbody;
     private Animator playerAnimator;
@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         GC = FindObjectOfType(typeof(GameController)) as GameController;
-        VC = FindObjectOfType(typeof(VoiceController)) as VoiceController;
+        //VC = FindObjectOfType(typeof(VoiceController)) as VoiceController;
         DM = FindObjectOfType(typeof(DialogueManager)) as DialogueManager;
 
         SpawnPowerUp = GameObject.Find("SpawnPowerUp").transform;
@@ -85,7 +85,7 @@ public class Player : MonoBehaviour
         ArmasBlue[powerUpsBlueColetados].SetActive(true);
         ArmasGreen[powerUpsGreenColetados].SetActive(true);
 
-        VC.PegaArmas();
+        //VC.PegaArmas();
 
         Shield.GetComponent<Collider2D>().enabled = false;
 
@@ -165,7 +165,7 @@ public class Player : MonoBehaviour
         {
             if(!DM.DialogueBoxOpen)
             {
-                VC.PegaArmas();
+                //VC.PegaArmas();
 
                 float movimentoX = Input.GetAxis("Horizontal");
                 float movimentoY = Input.GetAxis("Vertical");
@@ -210,7 +210,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            VC.PegaArmas();
+            //VC.PegaArmas();
 
                 float movimentoX = Input.GetAxis("Horizontal");
                 float movimentoY = Input.GetAxis("Vertical");
@@ -398,19 +398,19 @@ public class Player : MonoBehaviour
 
             case "PowerUpRed":
                 PowerUpRed();
-                VC.PegaArmas();
+                //VC.PegaArmas();
                 Destroy(col.gameObject);
                 break;
 
             case "PowerUpBlue":
                 PowerUpBlue();
-                VC.PegaArmas();
+                //VC.PegaArmas();
                 Destroy(col.gameObject);
                 break;
 
             case "PowerUpGreen":
                 PowerUpGreen();
-                VC.PegaArmas();
+                //VC.PegaArmas();
                 Destroy(col.gameObject);
                 break;
 
@@ -531,7 +531,7 @@ public class Player : MonoBehaviour
     void Dash()
     {
         isDashing = true;
-        velocidadeX = velocidadeX * dashVelocidade;
+        velocidadeX = velocidadeX * 1.5f * dashVelocidade;
         velocidadeY = velocidadeY * dashVelocidade;
     }
 
