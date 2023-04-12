@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 470396905}
   - component: {fileID: 470396904}
   - component: {fileID: 470396903}
+  - component: {fileID: 470396906}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -204,6 +205,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &470396906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 470396902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72a4a31b47ec4e24cb3b1a842713c7f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &492915123
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,10 +247,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sourceMusic: {fileID: 1240015381}
-  sourceFx: {fileID: 1205916069}
-  MusicaTitulo: {fileID: 8300000, guid: 3df0131b339740b409500872ebf934c1, type: 3}
-  MusicaFase1: {fileID: 8300000, guid: 3eb5036e061c2c548a4befc5d2775392, type: 3}
-  FxClick: {fileID: 8300000, guid: 433bb9aafca06454ea4d107dee879bfe, type: 3}
+  sourceFX: {fileID: 1205916069}
+  MusicaTitulo: {fileID: 8300000, guid: dfa822d2c46e60646804c6b441d4c06d, type: 3}
+  MusicaFase:
+  - {fileID: 8300000, guid: 73b409c5d2f90f0489f34d132687fbf0, type: 3}
+  - {fileID: 8300000, guid: ead66406ccf7ddb419519482483155d5, type: 3}
+  - {fileID: 8300000, guid: 8912e07c9457d3346bb331e02037b8a3, type: 3}
+  - {fileID: 8300000, guid: 91b1336f496b3cd4c8d8210acfcb7ebd, type: 3}
+  - {fileID: 8300000, guid: e1118d32fbd582d49841c91fd7e7ed15, type: 3}
+  - {fileID: 8300000, guid: aa79fb6486dac1c42ba53789961d053c, type: 3}
+  - {fileID: 8300000, guid: 952de99aba656594c8b1e64f4e92ac37, type: 3}
+  - {fileID: 8300000, guid: e37bffd4846a15649a79e668a0300e3c, type: 3}
+  - {fileID: 8300000, guid: 07678d1dd0527f843af2f7f79978c819, type: 3}
+  - {fileID: 8300000, guid: 4f5a8533567fd814c87b72a53ee47abb, type: 3}
+  - {fileID: 8300000, guid: 6283464f60fb6d640a3516b0930fd21a, type: 3}
   PianoKey1: {fileID: 8300000, guid: 057e4a3f0c3026741b7b53c02f798cc2, type: 3}
   PianoKey2: {fileID: 8300000, guid: a2b0108e9266e60478457525a1a94f5e, type: 3}
   PianoKey3: {fileID: 8300000, guid: 7e1d27fe6d1ecfc40a5a3a615ed024db, type: 3}
@@ -246,6 +269,8 @@ MonoBehaviour:
   PianoKey6: {fileID: 8300000, guid: a764884d24d01f54aa874237e0f1897d, type: 3}
   PianoKey7: {fileID: 8300000, guid: 7091ac0caf22b764db17363fae6051a1, type: 3}
   PianoKey8: {fileID: 8300000, guid: 0d34e8592f7c1d54c87a86d6770fae1f, type: 3}
+  volumeMaximoMusica: 0
+  volumeMaximoFX: 0
   Dialogo: 0
 --- !u!4 &492915125
 Transform:

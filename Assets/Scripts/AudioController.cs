@@ -7,20 +7,21 @@ public class AudioController : MonoBehaviour
 {
 
     public AudioSource sourceMusic;
-    public AudioSource sourceFx;
+    public AudioSource sourceFX;
 
     [Header("Musicas")]
     public AudioClip MusicaTitulo;
-    public AudioClip MusicaFase1;
+    public AudioClip[] MusicaFase;
 
     [Header("FX")]
-    public AudioClip FxClick;
-    public AudioClip PianoKey1, PianoKey2, PianoKey3, PianoKey4, PianoKey5, PianoKey6, PianoKey7, PianoKey8;
+
+    public AudioClip PianoKey1;
+    public AudioClip PianoKey2, PianoKey3, PianoKey4, PianoKey5, PianoKey6, PianoKey7, PianoKey8;
 
 
     //Configurações dos audios
-    private float volumeMaximoMusica;
-    private float volumeMaximoFx;
+    public float volumeMaximoMusica;
+    public float volumeMaximoFX;
 
     //Configurações da troca de música
     private AudioClip novaMusica;
@@ -33,7 +34,7 @@ public class AudioController : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         // Carrega as configurações de audio do aparelho
         volumeMaximoMusica = 1;
-        volumeMaximoFx = 1;
+        volumeMaximoFX = 1;
 
         TrocarMusica(MusicaTitulo, "MenuPrincipal", true);
     }
@@ -74,12 +75,12 @@ public class AudioController : MonoBehaviour
     public void tocarFX(AudioClip FX, float Volume)
     {
         float tempVolume = Volume;
-        if(Volume >= volumeMaximoFx)
+        if(Volume >= volumeMaximoFX)
         {
-            tempVolume = volumeMaximoFx;
+            tempVolume = volumeMaximoFX;
         }
-        sourceFx.volume = tempVolume;
-        sourceFx.PlayOneShot(FX);
+        sourceFX.volume = tempVolume;
+        sourceFX.PlayOneShot(FX);
     }
 
 }

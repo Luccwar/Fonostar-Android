@@ -231,9 +231,9 @@ public class GameController : MonoBehaviour
 
     }
 
-    public void ProximaFase(string NomeFase)
+    public void ProximaFase(string NomeFase, int MusicaNumero)
     {
-        AC.TrocarMusica(AC.MusicaFase1, NomeFase, true);
+        AC.TrocarMusica(AC.MusicaFase[MusicaNumero], NomeFase, true);
     }
 
 }

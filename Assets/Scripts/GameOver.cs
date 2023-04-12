@@ -19,9 +19,9 @@ public class GameOver : MonoBehaviour
         
     }
 
-    public void TentarNovamente(string NomeFase)
+    public void TentarNovamente(string NomeFase, int MusicaNumero)
     {
-        AC.TrocarMusica(AC.MusicaFase1, NomeFase, true);
+        AC.TrocarMusica(AC.MusicaFase[MusicaNumero], NomeFase, true);
     }
 
     public void VoltarAoMenu()
