@@ -11,7 +11,9 @@ public class PauseController : MonoBehaviour
     private GameObject pausePanel;
     private GameObject configuracoesPanel;
     public AudioMixer audioMixer;
-    public Slider volumeSlider;
+    public Slider volumeGeralSlider;
+    public Slider volumeMusicaSlider;
+    public Slider volumeFXSlider;
 
     private void Awake() {
         AC = FindObjectOfType(typeof(AudioController)) as AudioController;
@@ -19,7 +21,9 @@ public class PauseController : MonoBehaviour
         configuracoesPanel = GameObject.Find("MenuConfig");
         pausePanel.SetActive(false);
         configuracoesPanel.SetActive(false);
-        volumeSlider.value = PlayerPrefs.GetFloat("Volume");
+        volumeGeralSlider.value = PlayerPrefs.GetFloat("VolumeGeral");
+        volumeMusicaSlider.value = PlayerPrefs.GetFloat("VolumeMusicaAntes");
+        volumeFXSlider.value = PlayerPrefs.GetFloat("VolumeEfeitos");
     }
 
     public void PauseOff()
@@ -54,33 +58,69 @@ public class PauseController : MonoBehaviour
         Application.Quit();
     }
 
-    public void SetVolume (float volume)
+    public void SetVolumeGeral()
     {
-        audioMixer.SetFloat("masterVolume", volume);
-        if(volumeSlider.value <= -40)
+        audioMixer.SetFloat("masterVolume", volumeGeralSlider.value);
+        if(volumeGeralSlider.value <= -40)
         {
             audioMixer.SetFloat("masterVolume", -80);
         }
-        PlayerPrefs.SetFloat("Volume", volumeSlider.value);
+        PlayerPrefs.SetFloat("VolumeGeral", volumeGeralSlider.value);
     }
 
-    public void DiminuirVolume()
+    public void DiminuirVolumeGeral()
     {
-        volumeSlider.value--;
-        if(volumeSlider.value <= -40)
+        volumeGeralSlider.value--;
+        if(volumeGeralSlider.value <= -40)
         {
             audioMixer.SetFloat("masterVolume", -80);
         }
-        PlayerPrefs.SetFloat("Volume", volumeSlider.value);
+        PlayerPrefs.SetFloat("VolumeGeral", volumeGeralSlider.value);
     }
 
-    public void AumentarVolume()
+    public void AumentarVolumeGeral()
     {
-        volumeSlider.value++;
-        if(volumeSlider.value <= -40)
+        volumeGeralSlider.value++;
+        if(volumeGeralSlider.value <= -40)
         {
             audioMixer.SetFloat("masterVolume", -80);
         }
-        PlayerPrefs.SetFloat("Volume", volumeSlider.value);
+        PlayerPrefs.SetFloat("VolumeGeral", volumeGeralSlider.value);
+    }
+
+    public void SetVolumeMusica()
+    {
+        AC.sourceMusic.volume = volumeMusicaSlider.value;
+        PlayerPrefs.SetFloat("VolumeMusica", volumeMusicaSlider.value);
+    }
+
+    public void DiminuirVolumeMusica()
+    {
+        volumeMusicaSlider.value--;
+        PlayerPrefs.SetFloat("VolumeMusica", volumeMusicaSlider.value);
+    }
+
+    public void AumentarVolumeMusica()
+    {
+        volumeMusicaSlider.value++;
+        PlayerPrefs.SetFloat("VolumeMusica", volumeMusicaSlider.value);
+    }
+
+    public void SetVolumeEfeitos()
+    {
+        AC.sourceFX.volume = volumeFXSlider.value;
+        PlayerPrefs.SetFloat("VolumeEfeitos", volumeFXSlider.value);
+    }
+
+    public void DiminuirVolumeEfeitos()
+    {
+        volumeFXSlider.value--;
+        PlayerPrefs.SetFloat("VolumeEfeitos", volumeFXSlider.value);
+    }
+
+    public void AumentarVolumeEfeitos()
+    {
+        volumeFXSlider.value++;
+        PlayerPrefs.SetFloat("VolumeEfeitos", volumeFXSlider.value);
     }
 }

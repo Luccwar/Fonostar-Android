@@ -61,23 +61,7 @@ public class Receba : MonoBehaviour
 
     private void checkWord()
     {
-        if (wordRecognized != null)
-        {
-
-
-            if (wordRecognized.ToLower().Contains(PlayerPrefs.GetString("PalavraDesejada").ToLower()))
-            {
-                Debug.Log("Acertado");
-                messageText.text = "ACERTADO";
-                string letraInventario = PlayerPrefs.GetString("PalavraDesejada").Substring(0, 1);
-                PlayerPrefs.SetString("LetrasInventario", PlayerPrefs.GetString("LetrasInventario") + letraInventario);
-            }
-            else
-            {
-                Debug.Log("Errado");
-                messageText.text = "ERRADO";
-            }
-        }
+        
     }
 
 

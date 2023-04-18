@@ -23,6 +23,7 @@ public class MenuConfiguracoes : MonoBehaviour
     public GameObject palavraTexto;
     public GameObject faseImage;
     public GameObject botaoOuvir;
+    public GameObject botaoIniciarFase;
     public GameObject ouvirTexto;
     public GameObject buttonRetornar;
     public GameObject buttonRetornar2;
@@ -44,6 +45,7 @@ public class MenuConfiguracoes : MonoBehaviour
         palavraTexto = GameObject.Find("PalavraTexto");
         faseImage = GameObject.Find("FaseImage");
         botaoOuvir = GameObject.Find("BotaoOuvir");
+        botaoIniciarFase = GameObject.Find("BotaoIniciarFase");
         ouvirTexto = GameObject.Find("OuvirTexto");
         buttonRetornar = GameObject.Find("ButtonRetornar");
         buttonRetornar.GetComponent<Button>().onClick.AddListener(delegate{RetornarAoMenuPrincipal();});
@@ -57,20 +59,8 @@ public class MenuConfiguracoes : MonoBehaviour
         TutorialCanvas.SetActive(false);
         SelecaoCanvas.SetActive(false);
         FaseCanvas.SetActive(false);
-        if(!PlayerPrefs.HasKey("VolumeGeral"))
-        {
-            PlayerPrefs.SetFloat("VolumeGeral", -17);
-        }
-        if(!PlayerPrefs.HasKey("VolumeMusica"))
-        {
-            PlayerPrefs.SetFloat("VolumeMusica", 0.5f);
-        }
-        if(!PlayerPrefs.HasKey("VolumeEfeitos"))
-        {
-            PlayerPrefs.SetFloat("VolumeEfeitos", 1f);
-        }
         volumeGeralSlider.value = PlayerPrefs.GetFloat("VolumeGeral");
-        volumeMusicaSlider.value = PlayerPrefs.GetFloat("VolumeMusica");
+        volumeMusicaSlider.value = PlayerPrefs.GetFloat("VolumeMusicaAntes");
         volumeFXSlider.value = PlayerPrefs.GetFloat("VolumeEfeitos");
     }
 
@@ -113,7 +103,8 @@ public class MenuConfiguracoes : MonoBehaviour
         SelecaoCanvas.SetActive(true);
         BLC.GenerateList();
         if(volumeMusicaSlider.value == 0.1f)
-        volumeMusicaSlider.value = PlayerPrefs.GetFloat("VolumeMusicaAntes");
+            StartCoroutine("PronunciaAumentarVolume");
+        //volumeMusicaSlider.value = PlayerPrefs.GetFloat("VolumeMusicaAntes");
     }
 
     public void AbrirPronuncia(Palavra palavra)
@@ -122,8 +113,11 @@ public class MenuConfiguracoes : MonoBehaviour
         FaseCanvas.SetActive(true);
         faseImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/" + palavra.imagemPalavra);
         palavraTexto.GetComponent<TextMeshProUGUI>().text = palavra.nome;
-        Debug.Log(palavra.somFalado);
+        botaoOuvir.GetComponent<Button>().onClick.RemoveAllListeners();
         botaoOuvir.GetComponent<Button>().onClick.AddListener(delegate{AC.tocarFX(Resources.Load<AudioClip>("Audio/" + palavra.somFalado), 1);});
+        botaoIniciarFase.GetComponent<Button>().onClick.RemoveAllListeners();
+        botaoIniciarFase.GetComponent<Button>().onClick.AddListener(delegate{AC.TrocarMusica(AC.MusicaFase[Random.Range(0, AC.MusicaFase.Length)], palavra.fase, true);});
+        botaoIniciarFase.SetActive(false);
         ouvirTexto.GetComponent<TextMeshProUGUI>().text = "";
         if(palavra.palavraContextual != null)
             PlayerPrefs.SetString("PalavraDesejada", palavra.palavraContextual);
@@ -132,8 +126,14 @@ public class MenuConfiguracoes : MonoBehaviour
         if(volumeMusicaSlider.value > 0.1f)
         {
             PlayerPrefs.SetFloat("VolumeMusicaAntes", volumeMusicaSlider.value);
-            volumeMusicaSlider.value = 0.1f;
+            StartCoroutine("PronunciaDiminuirVolume");
+            //volumeMusicaSlider.value = 0.1f;
         }
+    }
+
+    public void AcertouPronuncia()
+    {
+        botaoIniciarFase.SetActive(true);
     }
 
     public void AbrirTelaTutorial()
@@ -142,9 +142,14 @@ public class MenuConfiguracoes : MonoBehaviour
         TutorialCanvas.SetActive(true);
     }
 
-    public void SelecionarFase(string NomeFase, int MusicaNumero)
+    public void SelecionarFase(string NomeFase)
     {
-        AC.TrocarMusica(AC.MusicaFase[MusicaNumero], NomeFase, true);
+        AC.TrocarMusica(AC.MusicaFase[Random.Range(0, AC.MusicaFase.Length)], NomeFase, true);
+    }
+
+    public void SelecionarFaseSemTrocarMusica(string NomeFase)
+    {
+        AC.TrocarCena(NomeFase);
     }
 
     public void SetVolumeGeral()
@@ -211,6 +216,26 @@ public class MenuConfiguracoes : MonoBehaviour
     {
         volumeFXSlider.value++;
         PlayerPrefs.SetFloat("VolumeEfeitos", volumeFXSlider.value);
+    }
+
+    IEnumerator PronunciaAumentarVolume()
+    {
+        for(float volume = 0.1f; volume < PlayerPrefs.GetFloat("VolumeMusicaAntes"); volume += 0.1f)
+        {
+            yield return new WaitForSeconds(0.1f);
+            volumeMusicaSlider.value = volume;
+        }
+        volumeMusicaSlider.value = PlayerPrefs.GetFloat("VolumeMusicaAntes");
+    }
+
+    IEnumerator PronunciaDiminuirVolume()
+    {
+        for(float volume = volumeMusicaSlider.value; volume > 0.1f; volume -= 0.1f)
+        {
+            yield return new WaitForSeconds(0.1f);
+            volumeMusicaSlider.value = volume;
+        }
+        volumeMusicaSlider.value = 0.1f;
     }
 
     public void PianoKey1()

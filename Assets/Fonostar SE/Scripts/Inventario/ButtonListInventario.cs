@@ -8,13 +8,10 @@ public class ButtonListInventario : MonoBehaviour
 {
     [SerializeField]
     private GameObject buttonTemplate;
-    private GameObject buttonRetornar;
 
     private List<GameObject> buttons;
 
     private void Start() {
-        buttonRetornar = GameObject.Find("ButtonRetornar");
-        buttonRetornar.GetComponent<Button>().onClick.AddListener(delegate{Inicial.trocarCena();});
         GenerateList();
     }
 

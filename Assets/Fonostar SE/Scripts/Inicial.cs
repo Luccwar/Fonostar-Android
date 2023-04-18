@@ -11,46 +11,55 @@ public class Inicial : MonoBehaviour
         abacaxi.nome = "Abacaxi";
         abacaxi.imagemPalavra = "abacaxi";
         abacaxi.somFalado = "abacaxi";
+        abacaxi.fase = "CenaTesteDialogoBLU1";
 
         Palavra alface = new Palavra();
         alface.nome = "Alface";
         alface.imagemPalavra = "alface";
         alface.somFalado = "alface";
+        alface.fase = "CenaTesteDialogoBLU2";
 
         Palavra anel = new Palavra();
         anel.nome = "Anel";
         anel.imagemPalavra = "anel";
         anel.somFalado = "anel";
+        anel.fase = "CenaTesteDialogoBLU3";
 
         Palavra bala = new Palavra();
         bala.nome = "Bala";
         bala.imagemPalavra = "bala";
         bala.somFalado = "bala";
+        bala.fase = "CenaTesteDialogoGRE1";
 
         Palavra bambu = new Palavra();
         bambu.nome = "Bambu";
         bambu.imagemPalavra = "bambu";
         bambu.somFalado = "bambu";
+        bambu.fase = "CenaTesteDialogoGRE2";
 
         Palavra buzina = new Palavra();
         buzina.nome = "Buzina";
         buzina.imagemPalavra = "buzina";
         buzina.somFalado = "buzina";
+        buzina.fase = "CenaTesteDialogoGRE3";
 
         Palavra capacete = new Palavra();
         capacete.nome = "Capacete";
         capacete.imagemPalavra = "capacete";
         capacete.somFalado = "capacete";
+        capacete.fase = "CenaTesteDialogoRED1";
 
         Palavra cenoura = new Palavra();
         cenoura.nome = "Cenoura";
         cenoura.imagemPalavra = "cenoura";
         cenoura.somFalado = "cenoura";
+        cenoura.fase = "CenaTesteDialogoRED2";
 
         Palavra cueca = new Palavra();
         cueca.nome = "Cueca";
         cueca.imagemPalavra = "cueca";
         cueca.somFalado = "cueca";
+        cueca.fase = "CenaTesteDialogoRED3";
 
         Palavra dado = new Palavra();
         dado.nome = "Dado";
@@ -689,29 +698,29 @@ public class Inicial : MonoBehaviour
         InfoPronuncia.letras.Add(A);
         InfoPronuncia.letras.Add(B);
         InfoPronuncia.letras.Add(C);
-        InfoPronuncia.letras.Add(D);
-        InfoPronuncia.letras.Add(E);
-        InfoPronuncia.letras.Add(F);
-        InfoPronuncia.letras.Add(G);
-        InfoPronuncia.letras.Add(H);
-        InfoPronuncia.letras.Add(I);
-        InfoPronuncia.letras.Add(J);
-        InfoPronuncia.letras.Add(K);
-        InfoPronuncia.letras.Add(L);
-        InfoPronuncia.letras.Add(M);
-        InfoPronuncia.letras.Add(N);
-        InfoPronuncia.letras.Add(O);
-        InfoPronuncia.letras.Add(P);
-        InfoPronuncia.letras.Add(Q);
-        InfoPronuncia.letras.Add(R);
-        InfoPronuncia.letras.Add(S);
-        InfoPronuncia.letras.Add(T);
-        InfoPronuncia.letras.Add(U);
-        InfoPronuncia.letras.Add(V);
-        //InfoPronuncia.letras.Add(W);
-        InfoPronuncia.letras.Add(X);
-        //InfoPronuncia.letras.Add(Y);
-        InfoPronuncia.letras.Add(Z);
+        // InfoPronuncia.letras.Add(D);
+        // InfoPronuncia.letras.Add(E);
+        // InfoPronuncia.letras.Add(F);
+        // InfoPronuncia.letras.Add(G);
+        // InfoPronuncia.letras.Add(H);
+        // InfoPronuncia.letras.Add(I);
+        // InfoPronuncia.letras.Add(J);
+        // InfoPronuncia.letras.Add(K);
+        // InfoPronuncia.letras.Add(L);
+        // InfoPronuncia.letras.Add(M);
+        // InfoPronuncia.letras.Add(N);
+        // InfoPronuncia.letras.Add(O);
+        // InfoPronuncia.letras.Add(P);
+        // InfoPronuncia.letras.Add(Q);
+        // InfoPronuncia.letras.Add(R);
+        // InfoPronuncia.letras.Add(S);
+        // InfoPronuncia.letras.Add(T);
+        // InfoPronuncia.letras.Add(U);
+        // InfoPronuncia.letras.Add(V);
+        // InfoPronuncia.letras.Add(W);
+        // InfoPronuncia.letras.Add(X);
+        // InfoPronuncia.letras.Add(Y);
+        // InfoPronuncia.letras.Add(Z);
 
         InfoPronuncia.palavraLojas = new List<PalavraLoja>();
         InfoPronuncia.palavraLojas.Add(nave);

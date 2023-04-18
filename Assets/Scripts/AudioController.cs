@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class AudioController : MonoBehaviour
 {
-
+    public AudioMixer audioMixer;
     public AudioSource sourceMusic;
     public AudioSource sourceFX;
 
@@ -33,8 +34,22 @@ public class AudioController : MonoBehaviour
     {
         DontDestroyOnLoad(this.gameObject);
         // Carrega as configurações de audio do aparelho
-        volumeMaximoMusica = 1;
-        volumeMaximoFX = 1;
+        if(!PlayerPrefs.HasKey("VolumeGeral"))
+        {
+            PlayerPrefs.SetFloat("VolumeGeral", -10);
+        }
+        if(!PlayerPrefs.HasKey("VolumeMusica"))
+        {
+            PlayerPrefs.SetFloat("VolumeMusica", 0.3f);
+            PlayerPrefs.SetFloat("VolumeMusicaAntes", 0.3f);
+        }
+        if(!PlayerPrefs.HasKey("VolumeEfeitos"))
+        {
+            PlayerPrefs.SetFloat("VolumeEfeitos", 1f);
+        }
+        audioMixer.SetFloat("masterVolume", PlayerPrefs.GetFloat("VolumeGeral"));
+        volumeMaximoMusica = PlayerPrefs.GetFloat("VolumeMusicaAntes");
+        volumeMaximoFX = PlayerPrefs.GetFloat("VolumeEfeitos");
 
         TrocarMusica(MusicaTitulo, "MenuPrincipal", true);
     }
@@ -48,18 +63,37 @@ public class AudioController : MonoBehaviour
         StartCoroutine("ChangeMusic");
     }
 
+    public void TrocarCena(string nomeCena)
+    {
+        SceneManager.LoadScene(nomeCena);
+    }
+
     IEnumerator ChangeMusic()
     {
-        for(float volume = volumeMaximoMusica; volume>= 0; volume -= 0.1f)
+        if(SceneManager.GetActiveScene().name == "MenuPrincipal")
         {
-            yield return new WaitForSeconds(0.1f);
-            sourceMusic.volume = volume;
+            for(float volume = PlayerPrefs.GetFloat("VolumeMusica"); volume>= 0; volume -= 0.1f)
+            {
+                yield return new WaitForSeconds(0.1f);
+                sourceMusic.volume = volume;
+            }
+            sourceMusic.volume = 0;
+            sourceMusic.clip = novaMusica;
+            sourceMusic.Play();
         }
-        sourceMusic.volume = 0;
-        sourceMusic.clip = novaMusica;
-        sourceMusic.Play();
+        else
+        {
+            for(float volume = volumeMaximoMusica; volume>= 0; volume -= 0.1f)
+            {
+                yield return new WaitForSeconds(0.1f);
+                sourceMusic.volume = volume;
+            }
+            sourceMusic.volume = 0;
+            sourceMusic.clip = novaMusica;
+            sourceMusic.Play();
+        }
 
-        for(float volume = 0; volume < 0; volume += 0.1f)
+        for(float volume = 0; volume < volumeMaximoMusica; volume += 0.1f)
         {
             yield return new WaitForSeconds(0.1f);
             sourceMusic.volume = volume;

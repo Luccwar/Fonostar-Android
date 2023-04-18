@@ -90,12 +90,13 @@ public class ButtonListControl : MonoBehaviour
         // faseCanvas.SetActive(true);
         faseImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/" + palavra.imagemPalavra);
         palavraTexto.GetComponent<TextMeshProUGUI>().text = palavra.nome;
+        botaoOuvir.GetComponent<Button>().onClick.RemoveAllListeners();
         botaoOuvir.GetComponent<Button>().onClick.AddListener(delegate{TocarAudio(Resources.Load<AudioClip>("Audio/" + palavra.somFalado));});
         ouvirTexto.GetComponent<TextMeshProUGUI>().text = "";
         if(palavra.palavraContextual != null)
-        PlayerPrefs.SetString("PalavraDesejada", palavra.palavraContextual);
+            PlayerPrefs.SetString("PalavraDesejada", palavra.palavraContextual);
         else
-        PlayerPrefs.SetString("PalavraDesejada", palavra.nome);
+            PlayerPrefs.SetString("PalavraDesejada", palavra.nome);
     }
 
     public void RetornarSelecao()

@@ -30,6 +30,7 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI tiroBlueMenuProText;
     public TextMeshProUGUI tiroGreenMenuProText;
     private GameObject panelVenceu;
+    private GameObject panelPerdeu;
     public GameObject joystick;
     public GameObject dashButton;
     public GameObject tiroRedButton;
@@ -75,6 +76,7 @@ public class GameController : MonoBehaviour
         panelRespawn = FindObjectOfType(typeof(RespawnPanel)) as RespawnPanel;
         panelSpawn = FindObjectOfType(typeof(SpawnPanel)) as SpawnPanel;
         panelVenceu = GameObject.Find("/Canvas/PanelVenceu");
+        panelPerdeu = GameObject.Find("/Canvas/PanelPerdeu");
         joystick = GameObject.Find("/Canvas/Fixed Joystick");
         dashButton = GameObject.Find("/Canvas/DashButton");
         tiroRedButton = GameObject.Find("/Canvas/BotaoTiroRed");
@@ -92,6 +94,8 @@ public class GameController : MonoBehaviour
         tiroRedSpawnProText.text = PlayerPrefs.GetString("TiroRed");
         tiroBlueSpawnProText.text = PlayerPrefs.GetString("TiroBlue");
         tiroGreenSpawnProText.text = PlayerPrefs.GetString("TiroGreen");
+        panelVenceu.SetActive(false);
+        panelPerdeu.SetActive(false);
         if(panelSpawn == null)
         {
             Vidas();
@@ -158,24 +162,38 @@ public class GameController : MonoBehaviour
 
     public void Morreu()
     {
-        GameSpeed = 0.3f;
-        panelRespawn.animator.SetTrigger("StartFade");
-        PC.pauseButton.interactable = false;
-        vidasExtras -= 1;
-        joystick.GetComponent<Animator>().SetTrigger("Morreu");
-        dashButton.GetComponent<Animator>().SetTrigger("Morreu");
-        if(tiroRedButton!=null)
-        tiroRedButton.GetComponent<Animator>().SetTrigger("Morreu");
-        if(tiroBlueButton!=null)
-        tiroBlueButton.GetComponent<Animator>().SetTrigger("Morreu");
-        if(tiroGreenButton!=null)
-        tiroGreenButton.GetComponent<Animator>().SetTrigger("Morreu");
-        tiroRedRespawnText.GetComponent<Animator>().SetTrigger("Morreu");
-        tiroBlueRespawnText.GetComponent<Animator>().SetTrigger("Morreu");
-        tiroGreenRespawnText.GetComponent<Animator>().SetTrigger("Morreu");
-        if(vidasExtras < 0)
+        if(vidasExtras > 0)
         {
-            SceneManager.LoadScene("GameOver");
+            GameSpeed = 0.3f;
+            panelRespawn.animator.SetTrigger("StartFade");
+            PC.pauseButton.interactable = false;
+            vidasExtras -= 1;
+            joystick.GetComponent<Animator>().SetTrigger("Morreu");
+            dashButton.GetComponent<Animator>().SetTrigger("Morreu");
+            if(tiroRedButton!=null)
+            tiroRedButton.GetComponent<Animator>().SetTrigger("Morreu");
+            if(tiroBlueButton!=null)
+            tiroBlueButton.GetComponent<Animator>().SetTrigger("Morreu");
+            if(tiroGreenButton!=null)
+            tiroGreenButton.GetComponent<Animator>().SetTrigger("Morreu");
+            tiroRedRespawnText.GetComponent<Animator>().SetTrigger("Morreu");
+            tiroBlueRespawnText.GetComponent<Animator>().SetTrigger("Morreu");
+            tiroGreenRespawnText.GetComponent<Animator>().SetTrigger("Morreu");
+        }
+        else
+        {
+            panelPerdeu.SetActive(true);
+            panelPerdeu.GetComponent<Animator>().SetTrigger("Perdeu");
+            joystick.GetComponent<Animator>().SetTrigger("Morreu");
+            dashButton.GetComponent<Animator>().SetTrigger("Morreu");
+            if(tiroRedButton!=null)
+                tiroRedButton.GetComponent<Animator>().SetTrigger("Morreu");
+            if(tiroBlueButton!=null)
+                tiroBlueButton.GetComponent<Animator>().SetTrigger("Morreu");
+            if(tiroGreenButton!=null)
+                tiroGreenButton.GetComponent<Animator>().SetTrigger("Morreu");
+            PC.pauseButton.interactable = false;
+            GameSpeed = 0f;
         }
     }
 
@@ -196,6 +214,7 @@ public class GameController : MonoBehaviour
         {
             if(LevasInimigos.Length-1 <= LevaAtual)
             {
+                panelVenceu.SetActive(true);
                 panelVenceu.GetComponent<Animator>().SetTrigger("Terminou");
                 joystick.GetComponent<Animator>().SetTrigger("Morreu");
                 dashButton.GetComponent<Animator>().SetTrigger("Morreu");
@@ -234,6 +253,11 @@ public class GameController : MonoBehaviour
     public void ProximaFase(string NomeFase, int MusicaNumero)
     {
         AC.TrocarMusica(AC.MusicaFase[MusicaNumero], NomeFase, true);
+    }
+
+    public void TentarNovamente(string NomeFase)
+    {
+        AC.TrocarCena(NomeFase);
     }
 
 }

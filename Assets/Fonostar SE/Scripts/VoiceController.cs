@@ -7,6 +7,7 @@ using TMPro;
 
 public class VoiceController : MonoBehaviour
 {
+    private MenuConfiguracoes MC;
 
     [SerializeField]
     TextMeshProUGUI uiText;
@@ -14,6 +15,7 @@ public class VoiceController : MonoBehaviour
     const string LANG_CODE = "pt-BR";
     void Start()
     {
+        MC = FindObjectOfType(typeof(MenuConfiguracoes)) as MenuConfiguracoes;
         Setup(LANG_CODE);
 
 #if UNITY_ANDROID
@@ -27,34 +29,7 @@ public class VoiceController : MonoBehaviour
     }
 
     private void Update() {
-        if(Input.GetKeyDown("w"))
-        {
-            string letraInventario = PlayerPrefs.GetString("PalavraDesejada").Substring(0, 1);
-            PlayerPrefs.SetString("LetrasInventario", PlayerPrefs.GetString("LetrasInventario") + letraInventario);
-            Debug.Log(PlayerPrefs.GetString("LetrasInventario"));
-        }
-        if(Input.GetKeyDown("space"))
-        {
-            var str = PlayerPrefs.GetString("LetrasInventario");
-            var l = PlayerPrefs.GetString("PalavraDesejada").Substring(0, 1);
-            var i = str.IndexOf(l);
-            string j = "";
-            // i will be the index of the first occurrence of 'p' in str, or -1 if not found.
-
-            if (i == -1)
-            {
-                // not found
-            }
-            else
-            {
-                do
-                {
-                    j = j + l;
-                    i = str.IndexOf(l, i + 1);
-                } while (i != -1);
-            }
-            Debug.Log(j);
-        }
+        
     }
 
     void CheckPermission()
@@ -107,17 +82,16 @@ public class VoiceController : MonoBehaviour
     {
         if (result.ToLower().Contains(PlayerPrefs.GetString("PalavraDesejada").ToLower()))
         {
-            Debug.Log("Acertado");
             StopListening();
-            uiText.text = "Acertadasso";
-            string letraInventario = PlayerPrefs.GetString("PalavraDesejada").Substring(0, 1);
-            PlayerPrefs.SetString("LetrasInventario", PlayerPrefs.GetString("LetrasInventario") + letraInventario);
+            MC.AcertouPronuncia();
+            // uiText.text = "Acertou!";
+            // string letraInventario = PlayerPrefs.GetString("PalavraDesejada").Substring(0, 1);
+            // PlayerPrefs.SetString("LetrasInventario", PlayerPrefs.GetString("LetrasInventario") + letraInventario);
         }
         else
         {
-            Debug.Log("Errado");
             StopListening();
-            uiText.text = "Erradasso";
+            uiText.text = "Errou!";
         }
         //uiText.text = result;
     }

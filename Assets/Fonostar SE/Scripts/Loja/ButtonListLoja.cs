@@ -6,6 +6,7 @@ using TMPro;
 
 public class ButtonListLoja : MonoBehaviour
 {
+    public AudioController AC;
 
     [SerializeField]
     private GameObject itemTemplate;
@@ -13,6 +14,7 @@ public class ButtonListLoja : MonoBehaviour
     private GameObject buttonRetornar;
     private GameObject lojaCanvas;
     private GameObject confirmacaoCanvas;
+    private GameObject inventarioCanvas;
     private GameObject palavra;
     private GameObject textPremio;
     private GameObject textDescricao;
@@ -26,10 +28,12 @@ public class ButtonListLoja : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        AC = FindObjectOfType(typeof(AudioController)) as AudioController;
         lojaCanvas = GameObject.Find("CanvasLoja");
         confirmacaoCanvas = GameObject.Find("CanvasConfirmacao");
+        inventarioCanvas = GameObject.Find("CanvasInventario");
         buttonRetornar = GameObject.Find("ButtonRetornar");
-        buttonRetornar.GetComponent<Button>().onClick.AddListener(delegate{Inicial.trocarCena();});
+        buttonRetornar.GetComponent<Button>().onClick.AddListener(delegate{AC.TrocarCena("MenuPrincipal");});
         palavra = GameObject.Find("TextPalavra");
         textPremio = GameObject.Find("TextPremio");
         textDescricao = GameObject.Find("TextDescricao");
@@ -38,6 +42,7 @@ public class ButtonListLoja : MonoBehaviour
         buttonConfirmar = GameObject.Find("ButtonConfirmar");
         panelConfirmacao = GameObject.Find("PanelConfirmacao");
         confirmacaoCanvas.SetActive(false);
+        inventarioCanvas.SetActive(false);
         panelConfirmacao.SetActive(false);
         GenerateList();
     }
@@ -208,10 +213,17 @@ public class ButtonListLoja : MonoBehaviour
         Debug.Log(usuario.palavrasObtidas);
     }
 
+    public void AbrirInventario()
+    {
+        lojaCanvas.SetActive(false);
+        inventarioCanvas.SetActive(true);
+    }
+
     public void RetornarLoja()
     {
         panelConfirmacao.SetActive(false);
         confirmacaoCanvas.SetActive(false);
+        inventarioCanvas.SetActive(false);
         lojaCanvas.SetActive(true);
         GenerateList();
     }
