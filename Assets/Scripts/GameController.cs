@@ -57,6 +57,10 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     private void Awake() 
     {
+        if(InfoPronuncia.usuarioAtivo.palavrasObtidas.Contains("VIDA"))
+        {
+            vidasExtras += 1;
+        }
         if(instance == null)
             instance = this;
         if(instance != this)

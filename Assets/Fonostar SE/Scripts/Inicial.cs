@@ -380,6 +380,7 @@ public class Inicial : MonoBehaviour
 
 
 
+
         
 
         
@@ -536,15 +537,17 @@ public class Inicial : MonoBehaviour
         Z.palavras.Add(zumbi);
 
 
-        Palavra palavraNave = new Palavra();
-        palavraNave.nome = "Nave";
-        palavraNave.imagemPalavra = "";
-        palavraNave.somFalado = "nave";
 
-        Palavra palavraCapacete = new Palavra();
-        palavraCapacete.nome = "Capacete";
-        palavraCapacete.imagemPalavra = "";
-        palavraCapacete.somFalado = "capacete";
+
+
+
+
+
+
+        // Palavra palavraNave = new Palavra();
+        // palavraNave.nome = "Nave";
+        // palavraNave.imagemPalavra = "";
+        // palavraNave.somFalado = "nave";
 
         Palavra palavraResistenciaUm = new Palavra();
         palavraResistenciaUm.nome = "Resistencia";
@@ -566,50 +569,66 @@ public class Inicial : MonoBehaviour
         palavraAtaqueUm.imagemPalavra = "";
         palavraAtaqueUm.somFalado = "ataque";
 
+        Palavra palavraAtaqueDois = new Palavra();
+        palavraAtaqueDois.nome = "Hostil";
+        palavraAtaqueDois.imagemPalavra = "";
+        palavraAtaqueDois.somFalado = "hostil";
+
+        Palavra palavraAtaqueTres = new Palavra();
+        palavraAtaqueTres.nome = "Opugnacao";
+        palavraAtaqueTres.imagemPalavra = "";
+        palavraAtaqueTres.somFalado = "opgnacao";
+
         Palavra palavraVidaExtra = new Palavra();
         palavraVidaExtra.nome = "Vida";
         palavraVidaExtra.imagemPalavra = "";
         palavraVidaExtra.somFalado = "vida";
 
-        Palavra palavraExemplo = new Palavra();
-        palavraExemplo.nome = "Exemplo";
-        palavraExemplo.imagemPalavra = "";
-        palavraExemplo.somFalado = "exemplo";
+        // Palavra palavraCapacete = new Palavra();
+        // palavraCapacete.nome = "Capacete";
+        // palavraCapacete.imagemPalavra = "";
+        // palavraCapacete.somFalado = "capacete";
 
-        Palavra palavraCobaia = new Palavra();
-        palavraCobaia.nome = "Cobaia";
-        palavraCobaia.imagemPalavra = "";
-        palavraCobaia.somFalado = "cobaia";
+        // Palavra palavraExemplo = new Palavra();
+        // palavraExemplo.nome = "Exemplo";
+        // palavraExemplo.imagemPalavra = "";
+        // palavraExemplo.somFalado = "exemplo";
 
-        Palavra palavraTestamento = new Palavra();
-        palavraTestamento.nome = "Testamento";
-        palavraTestamento.imagemPalavra = "";
-        palavraTestamento.somFalado = "testamento";
+        // Palavra palavraCobaia = new Palavra();
+        // palavraCobaia.nome = "Cobaia";
+        // palavraCobaia.imagemPalavra = "";
+        // palavraCobaia.somFalado = "cobaia";
 
-        Palavra palavraParagrafo = new Palavra();
-        palavraParagrafo.nome = "Paragrafo";
-        palavraParagrafo.imagemPalavra = "";
-        palavraParagrafo.somFalado = "paragrafo";
+        // Palavra palavraTestamento = new Palavra();
+        // palavraTestamento.nome = "Testamento";
+        // palavraTestamento.imagemPalavra = "";
+        // palavraTestamento.somFalado = "testamento";
 
-        Palavra palavraSubconsciente = new Palavra();
-        palavraSubconsciente.nome = "Subconsciente";
-        palavraSubconsciente.imagemPalavra = "";
-        palavraSubconsciente.somFalado = "subconsciente";
+        // Palavra palavraParagrafo = new Palavra();
+        // palavraParagrafo.nome = "Paragrafo";
+        // palavraParagrafo.imagemPalavra = "";
+        // palavraParagrafo.somFalado = "paragrafo";
+
+        // Palavra palavraSubconsciente = new Palavra();
+        // palavraSubconsciente.nome = "Subconsciente";
+        // palavraSubconsciente.imagemPalavra = "";
+        // palavraSubconsciente.somFalado = "subconsciente";
 
 
-        PalavraLoja nave = new PalavraLoja();
-        nave.palavra = palavraNave;
-        nave.nomePremio = "Nave";
-        nave.imagemPremio = "abacate";
-        nave.descPremio = "Derrote oponentes com uma nave novinha em folha.";
-        nave.palavraAnterior = "";
 
-        PalavraLoja capa = new PalavraLoja();
-        capa.palavra = palavraCapacete;
-        capa.nomePremio = "Capacete";
-        capa.imagemPremio = "capacete";
-        capa.descPremio = "Consiga uma proteção avançada com um capacete forjado por artesãos cearenses.";
-        capa.palavraAnterior = "";
+
+
+
+
+
+
+
+        // PalavraLoja nave = new PalavraLoja();
+        // nave.palavra = palavraNave;
+        // nave.nomePremio = "Nave";
+        // nave.imagemPremio = "nave";
+        // nave.descPremio = "Derrote oponentes com uma nave novinha em folha.";
+        // nave.palavraAnterior = "";
 
         PalavraLoja resistenciaUm = new PalavraLoja();
         resistenciaUm.palavra = palavraResistenciaUm;
@@ -623,21 +642,35 @@ public class Inicial : MonoBehaviour
         resistenciaDois.nomePremio = "Resistência +2";
         resistenciaDois.imagemPremio = "resistencia2";
         resistenciaDois.descPremio = "Torne sua nave ainda mais resistente com essa melhoria para o seu escudo.";
-        resistenciaDois.palavraAnterior = "Resistencia";
+        resistenciaDois.palavraAnterior = palavraResistenciaUm.nome;
 
         PalavraLoja resistenciaTres = new PalavraLoja();
         resistenciaTres.palavra = palavraResistenciaTres;
         resistenciaTres.nomePremio = "Resistência +3";
         resistenciaTres.imagemPremio = "resistencia3";
         resistenciaTres.descPremio = "Torne sua nave quase impenetrável com essa melhoria para o seu escudo.";
-        resistenciaTres.palavraAnterior = "Duravel";
+        resistenciaTres.palavraAnterior = palavraResistenciaDois.nome;
 
         PalavraLoja ataqueUm = new PalavraLoja();
         ataqueUm.palavra = palavraAtaqueUm;
         ataqueUm.nomePremio = "Ataque +1";
         ataqueUm.imagemPremio = "ataque1";
-        ataqueUm.descPremio = "Aumente seu poder de fogo com essa melhoria fenômenal.";
+        ataqueUm.descPremio = "Aumente seu poder de fogo com essa melhoria para os canhões azuis de sua nave.";
         ataqueUm.palavraAnterior = "";
+
+        PalavraLoja ataqueDois = new PalavraLoja();
+        ataqueDois.palavra = palavraAtaqueDois;
+        ataqueDois.nomePremio = "Ataque +2";
+        ataqueDois.imagemPremio = "ataque2";
+        ataqueDois.descPremio = "Aumente ainda mais seu poder de fogo com essa melhoria para os canhões verdes de sua nave.";
+        ataqueDois.palavraAnterior = palavraAtaqueUm.nome;
+
+        PalavraLoja ataqueTres = new PalavraLoja();
+        ataqueTres.palavra = palavraAtaqueTres;
+        ataqueTres.nomePremio = "Ataque +3";
+        ataqueTres.imagemPremio = "ataque3";
+        ataqueTres.descPremio = "Maximize seu poder de fogo com essa melhoria para os canhões vermelhos de sua nave.";
+        ataqueTres.palavraAnterior = palavraAtaqueDois.nome;
 
         PalavraLoja vidaExtra = new PalavraLoja();
         vidaExtra.palavra = palavraVidaExtra;
@@ -646,40 +679,47 @@ public class Inicial : MonoBehaviour
         vidaExtra.descPremio = "Ganhe uma vida extra para retornar a batalha de forma triunfal.";
         vidaExtra.palavraAnterior = "";
 
-        PalavraLoja testeUm = new PalavraLoja();
-        testeUm.palavra = palavraExemplo;
-        testeUm.nomePremio = "Exemplo";
-        testeUm.imagemPremio = "";
-        testeUm.descPremio = "Isto é só um exemplo para realização de testes, você provavelmente não deveria estar vendo isso.";
-        testeUm.palavraAnterior = "";
+        // PalavraLoja capa = new PalavraLoja();
+        // capa.palavra = palavraCapacete;
+        // capa.nomePremio = "Capacete";
+        // capa.imagemPremio = "capacete";
+        // capa.descPremio = "Consiga uma proteção avançada com um capacete forjado por artesãos cearenses.";
+        // capa.palavraAnterior = "";
 
-        PalavraLoja testeDois = new PalavraLoja();
-        testeDois.palavra = palavraCobaia;
-        testeDois.nomePremio = "Cobaia";
-        testeDois.imagemPremio = "";
-        testeDois.descPremio = "Isto é só um exemplo para realização de testes, você provavelmente não deveria estar vendo isso.";
-        testeDois.palavraAnterior = "";
+        // PalavraLoja testeUm = new PalavraLoja();
+        // testeUm.palavra = palavraExemplo;
+        // testeUm.nomePremio = "Exemplo";
+        // testeUm.imagemPremio = "";
+        // testeUm.descPremio = "Isto é só um exemplo para realização de testes, você provavelmente não deveria estar vendo isso.";
+        // testeUm.palavraAnterior = "";
 
-        PalavraLoja testeTres = new PalavraLoja();
-        testeTres.palavra = palavraTestamento;
-        testeTres.nomePremio = "Testamento";
-        testeTres.imagemPremio = "";
-        testeTres.descPremio = "Isto é só um exemplo para realização de testes, você provavelmente não deveria estar vendo isso.";
-        testeTres.palavraAnterior = "";
+        // PalavraLoja testeDois = new PalavraLoja();
+        // testeDois.palavra = palavraCobaia;
+        // testeDois.nomePremio = "Cobaia";
+        // testeDois.imagemPremio = "";
+        // testeDois.descPremio = "Isto é só um exemplo para realização de testes, você provavelmente não deveria estar vendo isso.";
+        // testeDois.palavraAnterior = "";
 
-        PalavraLoja testeQuatro = new PalavraLoja();
-        testeQuatro.palavra = palavraParagrafo;
-        testeQuatro.nomePremio = "Parágrafo";
-        testeQuatro.imagemPremio = "";
-        testeQuatro.descPremio = "Isto é só um exemplo para realização de testes, você provavelmente não deveria estar vendo isso.";
-        testeQuatro.palavraAnterior = "";
+        // PalavraLoja testeTres = new PalavraLoja();
+        // testeTres.palavra = palavraTestamento;
+        // testeTres.nomePremio = "Testamento";
+        // testeTres.imagemPremio = "";
+        // testeTres.descPremio = "Isto é só um exemplo para realização de testes, você provavelmente não deveria estar vendo isso.";
+        // testeTres.palavraAnterior = "";
 
-        PalavraLoja testeCinco = new PalavraLoja();
-        testeCinco.palavra = palavraSubconsciente;
-        testeCinco.nomePremio = "Subconciente";
-        testeCinco.imagemPremio = "";
-        testeCinco.descPremio = "Isto é só um exemplo para realização de testes, você provavelmente não deveria estar vendo isso.";
-        testeCinco.palavraAnterior = "";
+        // PalavraLoja testeQuatro = new PalavraLoja();
+        // testeQuatro.palavra = palavraParagrafo;
+        // testeQuatro.nomePremio = "Parágrafo";
+        // testeQuatro.imagemPremio = "";
+        // testeQuatro.descPremio = "Isto é só um exemplo para realização de testes, você provavelmente não deveria estar vendo isso.";
+        // testeQuatro.palavraAnterior = "";
+
+        // PalavraLoja testeCinco = new PalavraLoja();
+        // testeCinco.palavra = palavraSubconsciente;
+        // testeCinco.nomePremio = "Subconciente";
+        // testeCinco.imagemPremio = "";
+        // testeCinco.descPremio = "Isto é só um exemplo para realização de testes, você provavelmente não deveria estar vendo isso.";
+        // testeCinco.palavraAnterior = "";
 
         
 
@@ -723,18 +763,20 @@ public class Inicial : MonoBehaviour
         // InfoPronuncia.letras.Add(Z);
 
         InfoPronuncia.palavraLojas = new List<PalavraLoja>();
-        InfoPronuncia.palavraLojas.Add(nave);
-        InfoPronuncia.palavraLojas.Add(capa);
+        // InfoPronuncia.palavraLojas.Add(nave);
         InfoPronuncia.palavraLojas.Add(resistenciaUm);
         InfoPronuncia.palavraLojas.Add(resistenciaDois);
         InfoPronuncia.palavraLojas.Add(resistenciaTres);
         InfoPronuncia.palavraLojas.Add(ataqueUm);
+        InfoPronuncia.palavraLojas.Add(ataqueDois);
+        InfoPronuncia.palavraLojas.Add(ataqueTres);
         InfoPronuncia.palavraLojas.Add(vidaExtra);
-        InfoPronuncia.palavraLojas.Add(testeUm);
-        InfoPronuncia.palavraLojas.Add(testeDois);
-        InfoPronuncia.palavraLojas.Add(testeTres);
-        InfoPronuncia.palavraLojas.Add(testeQuatro);
-        InfoPronuncia.palavraLojas.Add(testeCinco);
+        // InfoPronuncia.palavraLojas.Add(capa);
+        // InfoPronuncia.palavraLojas.Add(testeUm);
+        // InfoPronuncia.palavraLojas.Add(testeDois);
+        // InfoPronuncia.palavraLojas.Add(testeTres);
+        // InfoPronuncia.palavraLojas.Add(testeQuatro);
+        // InfoPronuncia.palavraLojas.Add(testeCinco);
 
 
         InfoPronuncia.usuarios = new List<Usuario>();

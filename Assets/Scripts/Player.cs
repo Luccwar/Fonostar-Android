@@ -52,6 +52,33 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(InfoPronuncia.usuarioAtivo.palavrasObtidas.Contains("OPUGNACAO"))
+        {
+            powerUpsBlueColetados += 1;
+            powerUpsRedColetados += 1;
+            powerUpsGreenColetados += 1;
+        }
+        else if(InfoPronuncia.usuarioAtivo.palavrasObtidas.Contains("HOSTIL"))
+        {
+            powerUpsBlueColetados += 1;
+            powerUpsRedColetados += 1;
+        }
+        else if(InfoPronuncia.usuarioAtivo.palavrasObtidas.Contains("ATAQUE"))
+        {
+            powerUpsBlueColetados += 1;
+        }
+        if(InfoPronuncia.usuarioAtivo.palavrasObtidas.Contains("FORTIFICADO"))
+        {
+            HPMax += 3;
+        }
+        else if(InfoPronuncia.usuarioAtivo.palavrasObtidas.Contains("DURAVEL"))
+        {
+            HPMax += 2;
+        }
+        else if(InfoPronuncia.usuarioAtivo.palavrasObtidas.Contains("RESISTENCIA"))
+        {
+            HPMax += 1;
+        }
         GC = FindObjectOfType(typeof(GameController)) as GameController;
         //VC = FindObjectOfType(typeof(VoiceController)) as VoiceController;
         DM = FindObjectOfType(typeof(DialogueManager)) as DialogueManager;

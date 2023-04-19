@@ -13,7 +13,7 @@ public class MenuConfiguracoes : MonoBehaviour
 
     public AudioMixer audioMixer;
 
-    private GameObject MenuCanvas, ConfiguracoesCanvas, ConfigAudioCanvas, ConfigNaveCanvas, SelecaoFaseCanvas, TutorialCanvas, SelecaoCanvas, FaseCanvas;
+    private GameObject MenuCanvas, ConfiguracoesCanvas, ConfigAudioCanvas, ConfigNaveCanvas, SelecaoFaseCanvas, TutorialCanvas, CreditosCanvas, SelecaoCanvas, FaseCanvas;
     public Slider volumeGeralSlider;
     public Slider volumeMusicaSlider;
     public Slider volumeFXSlider;
@@ -38,6 +38,7 @@ public class MenuConfiguracoes : MonoBehaviour
         ConfigNaveCanvas = GameObject.Find("ConfiguracoesNaveCanvas");
         SelecaoFaseCanvas = GameObject.Find("SelecaoFaseCanvas");
         TutorialCanvas = GameObject.Find("TutorialCanvas");
+        CreditosCanvas = GameObject.Find("CreditosCanvas");
         SelecaoCanvas = GameObject.Find("SelecaoCanvas");
         FaseCanvas = GameObject.Find("FaseCanvas");
 
@@ -57,6 +58,7 @@ public class MenuConfiguracoes : MonoBehaviour
         ConfigNaveCanvas.SetActive(false);
         SelecaoFaseCanvas.SetActive(false);
         TutorialCanvas.SetActive(false);
+        CreditosCanvas.SetActive(false);
         SelecaoCanvas.SetActive(false);
         FaseCanvas.SetActive(false);
         volumeGeralSlider.value = PlayerPrefs.GetFloat("VolumeGeral");
@@ -69,6 +71,7 @@ public class MenuConfiguracoes : MonoBehaviour
         ConfiguracoesCanvas.SetActive(false);
         SelecaoFaseCanvas.SetActive(false);
         TutorialCanvas.SetActive(false);
+        CreditosCanvas.SetActive(false);
         SelecaoCanvas.SetActive(false);
         FaseCanvas.SetActive(false);
         MenuCanvas.SetActive(true);
@@ -140,6 +143,12 @@ public class MenuConfiguracoes : MonoBehaviour
     {
         MenuCanvas.SetActive(false);
         TutorialCanvas.SetActive(true);
+    }
+
+    public void AbrirTelaCreditos()
+    {
+        MenuCanvas.SetActive(false);
+        CreditosCanvas.SetActive(true);
     }
 
     public void SelecionarFase(string NomeFase)

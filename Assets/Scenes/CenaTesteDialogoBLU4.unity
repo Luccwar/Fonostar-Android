@@ -1394,9 +1394,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DT: {fileID: 0}
-  volumeGeralSlider: {fileID: 1413028453}
-  volumeMusicaSlider: {fileID: 1894364625}
-  volumeFXSlider: {fileID: 1508954797}
   tiroRedRespawnText: {fileID: 0}
   tiroBlueRespawnText: {fileID: 0}
   tiroGreenRespawnText: {fileID: 0}
@@ -15297,6 +15294,7 @@ GameObject:
   - component: {fileID: 1756224015}
   - component: {fileID: 1756224014}
   - component: {fileID: 1756224013}
+  - component: {fileID: 1756224016}
   m_Layer: 5
   m_Name: PanelVenceu
   m_TagString: Untagged
@@ -15380,6 +15378,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1756224011}
   m_CullTransparentMesh: 0
+--- !u!114 &1756224016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1756224011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f2b333c525ed104aaaea189c739ccad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1764757746
 PrefabInstance:
   m_ObjectHideFlags: 0
