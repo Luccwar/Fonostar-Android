@@ -44,7 +44,7 @@ public class ButtonListLoja : MonoBehaviour
         confirmacaoCanvas.SetActive(false);
         inventarioCanvas.SetActive(false);
         panelConfirmacao.SetActive(false);
-        GenerateList();
+        GenerateList();        
     }
 
     void GenerateList()

@@ -11,8 +11,8 @@ public class ButtonListControl : MonoBehaviour
     private MenuConfiguracoes MC;
     private AudioSource AS;
     [SerializeField]
-    private GameObject letraTemplate;
-    private List<GameObject> letras;
+    private GameObject buttonFaseTemplate;
+    private List<GameObject> fases;
     public GameObject buttonRetornar;
     public GameObject palavraTexto;
     public GameObject faseImage;
@@ -31,18 +31,37 @@ public class ButtonListControl : MonoBehaviour
     }
 
     public void GenerateList() {
-        letras = new List<GameObject>();
+        fases = new List<GameObject>();
         if (GetComponentInChildren<ButtonListButton>() != null)
         {
             ButtonListButton[] BLB = GetComponentsInChildren<ButtonListButton>();
-            foreach (ButtonListButton l in BLB)
+            foreach (ButtonListButton i in BLB)
             {
-                Destroy(l.gameObject);
+                Destroy(i.gameObject);
+            }
+        }
+
+        foreach (Letra l in InfoPronuncia.letras)
+        {
+            for(int x=0;x<l.palavras.Count;x++)
+            {
+                if(l.palavras[x].fase != null)
+                {
+                    GameObject fase = Instantiate(buttonFaseTemplate) as GameObject;
+                    fase.SetActive(true);
+
+                    int y = x;
+
+                    fase.GetComponent<Button>().onClick.AddListener(delegate{MC.AbrirPronuncia(l.palavras[y]);});
+                    fase.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Fases/" + l.palavras[y].imagemFase);
+
+                    fase.transform.SetParent(buttonFaseTemplate.transform.parent, false);
+                }
             }
         }
 
 
-        foreach (Letra l in InfoPronuncia.letras)
+        /*foreach (Letra l in InfoPronuncia.letras)
         {
             GameObject letra = Instantiate(letraTemplate) as GameObject;
             Button[] fases;
@@ -56,7 +75,7 @@ public class ButtonListControl : MonoBehaviour
             {
                 int y = x;
                 fases[x].onClick.AddListener(delegate{MC.AbrirPronuncia(l.palavras[y]);});
-                fases[x].GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/" + l.palavras[y].imagemPalavra);
+                fases[x].GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Fases/" + l.palavras[y].imagemFase);
                 //fases[x].onClick.AddListener(delegate{TrocarCena("Fase " + i + y);});
                 
                 //fases[x].onClick.AddListener(() => { TrocarCena("Fase " + i + x); });
@@ -65,7 +84,7 @@ public class ButtonListControl : MonoBehaviour
             //letra.GetComponent<ButtonListButton>().SetText(i);
 
             letra.transform.SetParent(letraTemplate.transform.parent, false);
-        }
+        }*/
     }
 
     public void ButtonClicked()

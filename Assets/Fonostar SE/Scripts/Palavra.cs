@@ -9,4 +9,5 @@ public class Palavra
     public string imagemPalavra;
     public string somFalado;
     public string fase;
+    public string imagemFase;
 }

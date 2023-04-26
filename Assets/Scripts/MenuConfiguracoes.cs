@@ -13,7 +13,7 @@ public class MenuConfiguracoes : MonoBehaviour
 
     public AudioMixer audioMixer;
 
-    private GameObject MenuCanvas, ConfiguracoesCanvas, ConfigAudioCanvas, ConfigNaveCanvas, SelecaoFaseCanvas, TutorialCanvas, CreditosCanvas, SelecaoCanvas, FaseCanvas;
+    private GameObject MenuCanvas, ConfiguracoesCanvas, ConfigAudioCanvas, ConfigNaveCanvas, SelecaoFaseCanvas, TutorialCanvas, CreditosCanvas, ApagarDadosCanvas, SelecaoCanvas, FaseCanvas;
     public Slider volumeGeralSlider;
     public Slider volumeMusicaSlider;
     public Slider volumeFXSlider;
@@ -27,6 +27,7 @@ public class MenuConfiguracoes : MonoBehaviour
     public GameObject ouvirTexto;
     public GameObject buttonRetornar;
     public GameObject buttonRetornar2;
+    public GameObject buttonApagarDados;
     
 
     private void Start() {
@@ -39,6 +40,7 @@ public class MenuConfiguracoes : MonoBehaviour
         SelecaoFaseCanvas = GameObject.Find("SelecaoFaseCanvas");
         TutorialCanvas = GameObject.Find("TutorialCanvas");
         CreditosCanvas = GameObject.Find("CreditosCanvas");
+        ApagarDadosCanvas = GameObject.Find("ApagarDadosCanvas");
         SelecaoCanvas = GameObject.Find("SelecaoCanvas");
         FaseCanvas = GameObject.Find("FaseCanvas");
 
@@ -52,6 +54,8 @@ public class MenuConfiguracoes : MonoBehaviour
         buttonRetornar.GetComponent<Button>().onClick.AddListener(delegate{RetornarAoMenuPrincipal();});
         buttonRetornar2 = GameObject.Find("BotaoRetornar");
         buttonRetornar2.GetComponent<Button>().onClick.AddListener(delegate{AbrirSelecaoFase();});
+        buttonApagarDados = GameObject.Find("ButtonApagarDados");
+        buttonApagarDados.GetComponent<Button>().onClick.AddListener(delegate{ApagarDados();});
 
         ConfiguracoesCanvas.SetActive(false);
         ConfigAudioCanvas.SetActive(false);
@@ -59,10 +63,14 @@ public class MenuConfiguracoes : MonoBehaviour
         SelecaoFaseCanvas.SetActive(false);
         TutorialCanvas.SetActive(false);
         CreditosCanvas.SetActive(false);
+        ApagarDadosCanvas.SetActive(false);
         SelecaoCanvas.SetActive(false);
         FaseCanvas.SetActive(false);
         volumeGeralSlider.value = PlayerPrefs.GetFloat("VolumeGeral");
-        volumeMusicaSlider.value = PlayerPrefs.GetFloat("VolumeMusicaAntes");
+        if(PlayerPrefs.GetString("CenaAnterior") == "LojaPalavra")
+            volumeMusicaSlider.value = PlayerPrefs.GetFloat("VolumeMusica");
+        else
+            volumeMusicaSlider.value = PlayerPrefs.GetFloat("VolumeMusicaAntes");
         volumeFXSlider.value = PlayerPrefs.GetFloat("VolumeEfeitos");
     }
 
@@ -72,6 +80,7 @@ public class MenuConfiguracoes : MonoBehaviour
         SelecaoFaseCanvas.SetActive(false);
         TutorialCanvas.SetActive(false);
         CreditosCanvas.SetActive(false);
+        ApagarDadosCanvas.SetActive(false);
         SelecaoCanvas.SetActive(false);
         FaseCanvas.SetActive(false);
         MenuCanvas.SetActive(true);
@@ -149,6 +158,12 @@ public class MenuConfiguracoes : MonoBehaviour
     {
         MenuCanvas.SetActive(false);
         CreditosCanvas.SetActive(true);
+    }
+
+    public void AbrirTelaApagarDados()
+    {
+        MenuCanvas.SetActive(false);
+        ApagarDadosCanvas.SetActive(true);
     }
 
     public void SelecionarFase(string NomeFase)
@@ -239,12 +254,32 @@ public class MenuConfiguracoes : MonoBehaviour
 
     IEnumerator PronunciaDiminuirVolume()
     {
-        for(float volume = volumeMusicaSlider.value; volume > 0.1f; volume -= 0.1f)
-        {
-            yield return new WaitForSeconds(0.1f);
-            volumeMusicaSlider.value = volume;
+        if(volumeMusicaSlider.value < 0.4f){
+            for(float volume = volumeMusicaSlider.value; volume > 0.1f; volume -= 0.05f)
+            {
+                yield return new WaitForSeconds(0.1f);
+                volumeMusicaSlider.value = volume;
+            }
+            volumeMusicaSlider.value = 0.1f;
         }
-        volumeMusicaSlider.value = 0.1f;
+        else
+        {
+            for(float volume = volumeMusicaSlider.value; volume > 0.1f; volume -= 0.1f)
+            {
+                yield return new WaitForSeconds(0.1f);
+                volumeMusicaSlider.value = volume;
+            }
+            volumeMusicaSlider.value = 0.1f;
+        }
+    }
+
+    void ApagarDados()
+    {
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.SetFloat("VolumeGeral", -10);
+        PlayerPrefs.SetFloat("VolumeMusica", 0.3f);
+        PlayerPrefs.SetFloat("VolumeMusicaAntes", 0.3f);
+        PlayerPrefs.SetFloat("VolumeEfeitos", 1f);
     }
 
     public void PianoKey1()
