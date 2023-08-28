@@ -259,9 +259,9 @@ public class GameController : MonoBehaviour
         AC.TrocarMusica(AC.MusicaFase[MusicaNumero], NomeFase, true);
     }
 
-    public void TentarNovamente(string NomeFase)
+    public void TentarNovamente()
     {
-        AC.TrocarCena(NomeFase);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
 }

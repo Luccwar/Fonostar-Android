@@ -11,84 +11,84 @@ public class Inicial : MonoBehaviour
         abacaxi.nome = "Abacaxi";
         abacaxi.imagemPalavra = "abacaxi";
         abacaxi.somFalado = "abacaxi";
-        abacaxi.fase = "CenaTesteDialogoBLU1";
+        abacaxi.fase = "CenaFaseBLU1";
         abacaxi.imagemFase = "FaseAbacaxi";
 
         Palavra alface = new Palavra();
         alface.nome = "Alface";
         alface.imagemPalavra = "alface";
         alface.somFalado = "alface";
-        alface.fase = "CenaTesteDialogoBLU2";
+        alface.fase = "CenaFaseBLU2";
         alface.imagemFase = "FaseAlface";
 
         Palavra anel = new Palavra();
         anel.nome = "Anel";
         anel.imagemPalavra = "anel";
         anel.somFalado = "anel";
-        anel.fase = "CenaTesteDialogoBLU3";
+        anel.fase = "CenaFaseBLU3";
         anel.imagemFase = "FaseAnel";
 
         Palavra bala = new Palavra();
         bala.nome = "Bala";
         bala.imagemPalavra = "bala";
         bala.somFalado = "bala";
-        bala.fase = "CenaTesteDialogoGRE1";
+        bala.fase = "CenaFaseGRE1";
         bala.imagemFase = "FaseBala";
 
         Palavra bambu = new Palavra();
         bambu.nome = "Bambu";
         bambu.imagemPalavra = "bambu";
         bambu.somFalado = "bambu";
-        bambu.fase = "CenaTesteDialogoGRE2";
+        bambu.fase = "CenaFaseGRE2";
         bambu.imagemFase = "FaseBambu";
 
         Palavra buzina = new Palavra();
         buzina.nome = "Buzina";
         buzina.imagemPalavra = "buzina";
         buzina.somFalado = "buzina";
-        buzina.fase = "CenaTesteDialogoGRE3";
+        buzina.fase = "CenaFaseGRE3";
         buzina.imagemFase = "FaseBuzina";
 
         Palavra capacete = new Palavra();
         capacete.nome = "Capacete";
         capacete.imagemPalavra = "capacete";
         capacete.somFalado = "capacete";
-        capacete.fase = "CenaTesteDialogoRED1";
+        capacete.fase = "CenaFaseRED1";
         capacete.imagemFase = "FaseCapacete";
 
         Palavra cenoura = new Palavra();
         cenoura.nome = "Cenoura";
         cenoura.imagemPalavra = "cenoura";
         cenoura.somFalado = "cenoura";
-        cenoura.fase = "CenaTesteDialogoRED2";
+        cenoura.fase = "CenaFaseRED2";
         cenoura.imagemFase = "FaseCenoura";
 
         Palavra cueca = new Palavra();
         cueca.nome = "Cueca";
         cueca.imagemPalavra = "cueca";
         cueca.somFalado = "cueca";
-        cueca.fase = "CenaTesteDialogoRED3";
+        cueca.fase = "CenaFaseRED3";
         cueca.imagemFase = "FaseCueca";
 
         Palavra dado = new Palavra();
         dado.nome = "Dado";
         dado.imagemPalavra = "dado";
         dado.somFalado = "dado";
-        dado.fase = "CenaTesteDialogoBLU4";
+        dado.fase = "CenaFaseBLU4";
         dado.imagemFase = "FaseDado";
 
         Palavra dedo = new Palavra();
         dedo.nome = "Dedo";
         dedo.imagemPalavra = "dedo";
         dedo.somFalado = "dedo";
-        dedo.fase = "CenaTesteDialogoGRE4";
+        dedo.fase = "CenaFaseGRE4";
         dedo.imagemFase = "FaseDedo";
 
         Palavra diamante = new Palavra();
         diamante.nome = "Diamante";
         diamante.imagemPalavra = "diamante";
         diamante.somFalado = "diamante";
-        diamante.fase = "CenaTesteDialogoRED4";
+        diamante.fase = "CenaFaseRED4";
         diamante.imagemFase = "FaseDiamante";
 
         Palavra elefante = new Palavra();

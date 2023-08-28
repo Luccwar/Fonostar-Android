@@ -13,7 +13,7 @@ public class MenuConfiguracoes : MonoBehaviour
 
     public AudioMixer audioMixer;
 
-    private GameObject MenuCanvas, ConfiguracoesCanvas, ConfigAudioCanvas, ConfigNaveCanvas, SelecaoFaseCanvas, TutorialCanvas, CreditosCanvas, ApagarDadosCanvas, SelecaoCanvas, FaseCanvas;
+    private GameObject MenuCanvas, ConfiguracoesCanvas, ConfigAudioCanvas, ConfigNaveCanvas, TutorialCanvas, CreditosCanvas, ApagarDadosCanvas, SelecaoCanvas, FaseCanvas;
     public Slider volumeGeralSlider;
     public Slider volumeMusicaSlider;
     public Slider volumeFXSlider;
@@ -37,7 +37,6 @@ public class MenuConfiguracoes : MonoBehaviour
         ConfiguracoesCanvas = GameObject.Find("ConfiguracoesCanvas");
         ConfigAudioCanvas = GameObject.Find("ConfiguracoesAudioCanvas");
         ConfigNaveCanvas = GameObject.Find("ConfiguracoesNaveCanvas");
-        SelecaoFaseCanvas = GameObject.Find("SelecaoFaseCanvas");
         TutorialCanvas = GameObject.Find("TutorialCanvas");
         CreditosCanvas = GameObject.Find("CreditosCanvas");
         ApagarDadosCanvas = GameObject.Find("ApagarDadosCanvas");
@@ -60,7 +59,6 @@ public class MenuConfiguracoes : MonoBehaviour
         ConfiguracoesCanvas.SetActive(false);
         ConfigAudioCanvas.SetActive(false);
         ConfigNaveCanvas.SetActive(false);
-        SelecaoFaseCanvas.SetActive(false);
         TutorialCanvas.SetActive(false);
         CreditosCanvas.SetActive(false);
         ApagarDadosCanvas.SetActive(false);
@@ -77,7 +75,6 @@ public class MenuConfiguracoes : MonoBehaviour
     public void RetornarAoMenuPrincipal()
     {
         ConfiguracoesCanvas.SetActive(false);
-        SelecaoFaseCanvas.SetActive(false);
         TutorialCanvas.SetActive(false);
         CreditosCanvas.SetActive(false);
         ApagarDadosCanvas.SetActive(false);
