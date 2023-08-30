@@ -1,7 +1,7 @@
 <img src="https://github.com/Luccwar/Fonostar-Android/assets/42842302/bfa0b717-6691-4f32-9c55-9addc61e2ca6" width='15%' height='15%' align="right" />
 
 # Fonostar for Android
-<a href="https://github.com/Luccwar/Fonostar-Android/blob/master/README.md"><img alt="Static Badge" src="https://img.shields.io/badge/lang-en-darkred"></a> <a href="https://github.com/Luccwar/Fonostar-Android/blob/master/README_PT-BR.md"><img alt="Static Badge" src="https://img.shields.io/badge/lang-pt--br-darkgreen" ></a>
+<a href="https://github.com/Luccwar/Fonostar-Android/blob/master/README.md"><img alt="Change Language to English" src="https://img.shields.io/badge/lang-en-darkred"></a> <a href="https://github.com/Luccwar/Fonostar-Android/blob/master/README_PT-BR.md"><img alt="Mudar Língua para o Português Brasileiro" src="https://img.shields.io/badge/lang-pt--br-darkgreen" ></a>
 
 ### The Application
 Fonostar is a spaceshooter-style game that aims to stimulate the player's pronunciation of words and phonemes. You control a ship and must defeat enemy ships using three different projectiles.
