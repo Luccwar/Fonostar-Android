@@ -1,9 +1,9 @@
 <img src="https://github.com/Luccwar/Fonostar-Android/assets/42842302/bfa0b717-6691-4f32-9c55-9addc61e2ca6" width='15%' height='15%' align="right" />
 
 # Fonostar para Android
-<a href="https://github.com/Luccwar/Fonostar-Android/blob/master/README.md"><img alt="Static Badge" src="https://img.shields.io/badge/lang-en-darkred"></a> <a href="https://github.com/Luccwar/Fonostar-Android/blob/master/README_PT-BR.md"><img alt="Static Badge" src="https://img.shields.io/badge/lang-pt--br-darkgreen" ></a>
+<a href="https://github.com/Luccwar/Fonostar-Android/blob/master/README.md"><img alt="Change Language to English" src="https://img.shields.io/badge/lang-en-darkred"></a> <a href="https://github.com/Luccwar/Fonostar-Android/blob/master/README_PT-BR.md"><img alt="Mudar Língua para o Português Brasileiro" src="https://img.shields.io/badge/lang-pt--br-darkgreen" ></a>
 
-### O aplicativo
+### O Aplicativo
 Fonostar é um jogo do estilo spaceshooter que objetiva estimular a pronúncia de palavras e fonemas do jogador. Você controla uma nave e deve derrotar naves oponentes utilizando de três diferentes projéteis.
 
 <p align="center">
@@ -18,7 +18,7 @@ Para obter acesso aos níveis do jogo, o jogador antes deve pronunciar uma palav
 
 Fonostar busca entregar a experiência de um jogo completo e, sobretudo, incentivar o usuário a praticar fonemas e palavras de diferentes tipos.
 
-### O projeto
+### O Projeto
 O código fonte do aplicativo está disponível em sua totalidade neste repositório e deve funcionar em quaisquer versões Unity 2021+ que possuam o Android SDK instalado.
 
 <p align="center">
