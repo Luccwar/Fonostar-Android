@@ -1,3 +1,5 @@
+<img src="https://github.com/Luccwar/Fonostar-Android/assets/42842302/bfa0b717-6691-4f32-9c55-9addc61e2ca6" width='15%' height='15%' align="right" />
+
 # Fonostar para Android
 ### O aplicativo
 Fonostar é um jogo do estilo spaceshooter que objetiva estimular a pronúncia de palavras e fonemas do jogador. Você controla uma nave e deve derrotar naves oponentes utilizando de três diferentes projéteis.
