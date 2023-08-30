@@ -25,5 +25,5 @@ O código fonte do aplicativo está disponível em sua totalidade neste reposit�
 Baixe o app: <br>
 <a href='https://play.google.com/store/apps/details?id=com.IFSul.Fonostar&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Disponível no Google Play' src='https://play.google.com/intl/pt-BR/badges/static/images/badges/pt-br_badge_web_generic.png' width='20%' height='20%'/></a>
 <br>
-<sub><sup>Google Play e o logotipo do Google Play são marcas registradas da Google LLC.</sup></sub>
+<sub><sup>Google Play e o logotipo do Google Play são marcas registradas da Google LLC. O aplicativo está somente disponível em português do Brasil para pessoas residentes do Brasil.</sup></sub>
 </p>
